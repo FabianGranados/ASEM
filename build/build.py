@@ -681,11 +681,10 @@ def render_home(key, page):
       </div>
     </a>''')
 
-    # 3 tarjetas adicionales pendientes de URL final (Ferias, Silleteria, Accesorios)
+    # 2 tarjetas adicionales pendientes de URL final (Silleteria, Ferias)
     pending_meta = [
-        ('FERIAS',     'Stands, montajes feriales y activaciones de marca.'),
         ('SILLETERÍA', 'Sillas para bodas, banquetes y ceremonias de volumen.'),
-        ('ACCESORIOS', 'Calefactores, bombillos, pista LED y mas detalles.'),
+        ('FERIAS',     'Stands, montajes feriales y activaciones de marca.'),
     ]
     for h3_name, desc_ in pending_meta:
         cards.append(f'''    <div class="cat-card cat-card-pending reveal" role="img" aria-label="{escape(h3_name)}">
@@ -699,23 +698,31 @@ def render_home(key, page):
       </div>
     </div>''')
 
+    # Tarjetas de accesorios (mismo estilo cat-card que las anteriores) — linkean a paginas reales
+    acc_cat_meta = [
+        ('CALEFACTORES',        'calefactores-ambiente-para-eventos',  'Para que la noche fria no acabe la fiesta antes de tiempo.',          'calefactor-piramide-en-alquiler.webp',          'calefactor piramide en alquiler'),
+        ('PISTA DE BAILE LED',  'pista-de-baile-para-eventos',         'Superficie iluminada que sube la energia a media noche.',           'pista-de-baile-led-para-eventos.webp',          'pista de baile led para eventos'),
+        ('BOMBILLOS VINTAGE',   'bombillos-vintage-para-eventos',      'Cadenas de luces calidas para techos, terrazas y patios.',          'bombillos-vintage-para-eventos.webp',           'bombillos vintage para eventos'),
+        ('SEPARADORES DE FILA', 'separadores-de-fila-para-eventos',    'Para organizar entradas, accesos VIP y areas con flujo elegante.',  'separadores-de-fila-dorados-para-eventos.webp', 'separadores de fila dorados para eventos'),
+    ]
+    acc_cards = []
+    for h3_name, slug_, desc_, img_file, alt_ in acc_cat_meta:
+        acc_cards.append(f'''    <a href="{slug_}/" class="cat-card reveal">
+      <img src="assets/img/{escape(img_file)}" alt="{escape(alt_)}" loading="lazy">
+      <div class="cat-card-overlay-rest">
+        <h3 class="cat-card-name">{escape(h3_name)}</h3>
+      </div>
+      <div class="cat-card-overlay-hover">
+        <span class="cat-card-name">{escape(h3_name)}</span>
+        <p class="cat-card-desc">{escape(desc_)}</p>
+        <span class="cat-card-arrow">&rarr;</span>
+      </div>
+    </a>''')
+
     # gallery — incluye TODAS las imagenes de eventos del Excel (no las 6 cat-cards ni el logo footer)
     gallery_figs = '\n'.join(
         f'      <figure class="reveal"><img src="assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>'
         for img in gallery_images)
-
-    # Accesorios
-    acc_items = [
-        ('Calefactores de Ambiente', 'calefactores-ambiente-para-eventos', 'Para que la noche fria no acabe la fiesta antes de tiempo.'),
-        ('Separadores de Fila',      'separadores-de-fila-para-eventos',  'Para organizar entradas, accesos VIP y areas con flujo elegante.'),
-        ('Bombillos Vintage',        'bombillos-vintage-para-eventos',    'Cadenas de luces calidas para techos, terrazas y patios.'),
-        ('Pista de Baile',           'pista-de-baile-para-eventos',       'Superficie iluminada que sube la energia a media noche.'),
-    ]
-    acc_html = '\n'.join(f'''      <a class="acc-card reveal" href="{slug_}/">
-        <svg class="acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1"></rect><path d="M3 12h18"></path><path d="M12 6v12"></path></svg>
-        <span class="acc-name">{escape(name)}</span>
-        <p class="acc-desc">{escape(d)}</p>
-      </a>''' for name, slug_, d in acc_items)
 
     body = f'''{head}
 {nav}
@@ -760,8 +767,8 @@ def render_home(key, page):
 <section class="catalogo" id="catalogo">
   <div class="section-head">
     <div class="section-head-text reveal">
-      <span class="label">Nuestro catalogo</span>
-      <p class="title-section">Seis estilos para<br>seis ambientes.</p>
+      <span class="label">Mobiliario</span>
+      <p class="title-section">Estilos que ambientan<br>tu evento.</p>
     </div>
     <p class="section-head-aside reveal">
       Cada coleccion esta pensada para un tipo de evento.
@@ -773,16 +780,19 @@ def render_home(key, page):
   </div>
 </section>
 
-<section class="accesorios" id="accesorios">
-  <div class="accesorios-inner">
-    <div class="accesorios-head reveal">
-      <span class="label">Complementos</span>
-      <p class="title-section on-dark">Detalles que cierran<br>la experiencia.</p>
-      <p>Mas alla del mobiliario, los accesorios que terminan de ambientar y de cuidar a tus invitados.</p>
+<section class="catalogo catalogo-accesorios" id="accesorios">
+  <div class="section-head">
+    <div class="section-head-text reveal">
+      <span class="label">Accesorios</span>
+      <p class="title-section">Detalles que cierran<br>la experiencia.</p>
     </div>
-    <div class="accesorios-grid">
-{acc_html}
-    </div>
+    <p class="section-head-aside reveal">
+      Mas alla del mobiliario: iluminacion, calefaccion y elementos
+      que terminan de ambientar y de cuidar a tus invitados.
+    </p>
+  </div>
+  <div class="catalogo-grid">
+{chr(10).join(acc_cards)}
   </div>
 </section>
 

@@ -391,12 +391,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ============================================================ CATALOGO (home) */
 .catalogo { background: var(--neutro); padding: 96px 5vw; }
+.catalogo-accesorios { background: var(--blanco); }
+.catalogo-accesorios + section { border-top: 1px solid rgba(0,0,0,0.04); }
 .section-head { max-width: 1280px; margin: 0 auto 56px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
 .section-head-text { max-width: 640px; }
 .section-head-aside { font-family: var(--font-body); font-weight: 300; font-size: 15px; color: var(--gris); max-width: 360px; line-height: 1.7; }
 
-.catalogo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; max-width: 1280px; margin: 0 auto; }
-.cat-card { position: relative; height: 400px; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--oscuro); display: block; }
+.catalogo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; max-width: 1320px; margin: 0 auto; }
+.cat-card { position: relative; height: 340px; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--oscuro); display: block; }
 
 /* Tarjetas "Pronto" sin URL aun — fondo gradiente, no clickeables */
 .cat-card-pending {
@@ -679,6 +681,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
 /* ============================================================ RESPONSIVE */
+/* Tablet: 3 columnas para catalogo */
+@media (max-width: 1200px) and (min-width: 1024px) {
+  .catalogo-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
 @media (max-width: 1023px) {
   .nav-links { display: none; }
   .nav-burger { display: flex; }
