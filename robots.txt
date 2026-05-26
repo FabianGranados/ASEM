@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alquilersalasparaeventosymobiliario.com/sitemap.xml
