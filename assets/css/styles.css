@@ -228,6 +228,57 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
               var(--oscuro);
   z-index: 0;
 }
+
+/* Hero slideshow — 4 capas con crossfade */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--oscuro);
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  will-change: opacity;
+}
+.hero-slide.is-active { opacity: 1; }
+.hero-slides::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(13,42,50,0.88) 0%, rgba(13,42,50,0.55) 60%, rgba(13,42,50,0.35) 100%);
+  pointer-events: none;
+}
+/* Indicador de slide activo (puntos abajo del hero) */
+.hero-dots {
+  position: absolute;
+  bottom: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+}
+.hero-dots button {
+  width: 28px;
+  height: 2px;
+  background: rgba(255,255,255,0.25);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.hero-dots button.is-active { background: var(--turquesa); }
+@media (max-width: 767px) {
+  .hero-dots { bottom: 60px; }
+  .hero-dots button { width: 20px; }
+}
 .hero-content { position: relative; z-index: 2; max-width: 880px; }
 .hero .label { color: var(--turquesa); margin-bottom: 28px; }
 .hero h1 {

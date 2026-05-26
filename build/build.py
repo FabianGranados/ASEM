@@ -703,7 +703,12 @@ def render_home(key, page):
 {nav}
 
 <section class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide is-active" style="background-image:url('assets/img/hero-1-salas-lounge.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/hero-2-mobiliario-rustico.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/hero-3-sillas-acapulco.webp')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/hero-4-parasoles.webp')"></div>
+  </div>
   <div class="hero-content">
     <span class="label anim anim-1">Bogota &middot; Colombia</span>
     <h1 class="anim anim-2">{escape(h1)}</h1>
@@ -712,6 +717,12 @@ def render_home(key, page):
       <a href="#catalogo" class="btn btn-outline-light">Ver catalogo</a>
       <a class="btn btn-turquesa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
     </div>
+  </div>
+  <div class="hero-dots" role="tablist" aria-label="Cambiar imagen del hero">
+    <button type="button" class="is-active" aria-label="Salas Lounge"></button>
+    <button type="button" aria-label="Mobiliario rustico"></button>
+    <button type="button" aria-label="Sillas Acapulco"></button>
+    <button type="button" aria-label="Parasoles"></button>
   </div>
   <div class="scroll-indicator" aria-hidden="true">
     <span class="scroll-label">Scroll</span>

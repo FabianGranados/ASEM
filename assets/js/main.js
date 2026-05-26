@@ -32,6 +32,30 @@ document.documentElement.classList.add('js');
   });
 })();
 
+/* Hero slideshow — cycle every 2.5s with crossfade, pause when tab hidden */
+(function () {
+  var slides = document.querySelectorAll('.hero-slide');
+  var dots = document.querySelectorAll('.hero-dots button');
+  if (slides.length < 2) return;
+  var idx = 0;
+  var timer = null;
+  function show(n) {
+    idx = (n + slides.length) % slides.length;
+    slides.forEach(function (s, i) { s.classList.toggle('is-active', i === idx); });
+    dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+  }
+  function next() { show(idx + 1); }
+  function start() { stop(); timer = setInterval(next, 2500); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function () { show(i); start(); });
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+  start();
+})();
+
 /* Scroll reveal */
 (function () {
   var els = document.querySelectorAll('.reveal');
