@@ -56,6 +56,18 @@ document.documentElement.classList.add('js');
   start();
 })();
 
+/* Galeria "Ver mas eventos" — toggle expand/collapse */
+(function () {
+  var btn = document.getElementById('galeriaMoreBtn');
+  var grid = document.getElementById('galeriaGrid');
+  if (!btn || !grid) return;
+  btn.addEventListener('click', function () {
+    var expanded = grid.classList.toggle('expanded');
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    btn.firstChild.textContent = (expanded ? 'Ver menos eventos ' : 'Ver mas eventos ');
+  });
+})();
+
 /* Scroll reveal */
 (function () {
   var els = document.querySelectorAll('.reveal');

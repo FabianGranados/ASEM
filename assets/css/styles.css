@@ -476,6 +476,33 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .galeria-grid img, .galeria-grid .img-placeholder { width: 100%; height: auto; display: block; transition: transform 0.4s ease, filter 0.4s ease; }
 .galeria-grid figure:hover img, .galeria-grid figure:hover .img-placeholder { transform: scale(1.03); filter: saturate(1.15); }
 
+/* Galeria "Ver mas" — extras visibles solo cuando .galeria-grid.expanded */
+.gallery-extra { display: none; }
+.galeria-grid.expanded .gallery-extra { display: block; }
+
+.galeria-more-wrap { text-align: center; margin-top: 32px; }
+.galeria-more-btn {
+  background: transparent;
+  border: 1px solid var(--turquesa);
+  color: var(--profundo);
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.galeria-more-btn:hover { background: var(--turquesa); color: var(--blanco); transform: translateY(-1px); }
+.galeria-more-btn svg { transition: transform 0.3s ease; }
+.galeria-more-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.galeria-more-count { font-weight: 400; opacity: 0.7; font-size: 11px; letter-spacing: 2px; }
+
 /* SVG placeholder visual */
 .img-placeholder {
   background: linear-gradient(135deg, var(--suave) 0%, var(--turquesa) 100%);

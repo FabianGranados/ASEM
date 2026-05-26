@@ -720,9 +720,23 @@ def render_home(key, page):
     </a>''')
 
     # gallery — incluye TODAS las imagenes de eventos del Excel (no las 6 cat-cards ni el logo footer)
-    gallery_figs = '\n'.join(
-        f'      <figure class="reveal"><img src="assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>'
-        for img in gallery_images)
+    # Las primeras 8 visibles; resto colapsado tras boton "Ver mas eventos" (los <img> siguen en el HTML para SEO)
+    GALLERY_INITIAL = 8
+    figs_lines = []
+    for i, img in enumerate(gallery_images):
+        cls = 'reveal' if i < GALLERY_INITIAL else 'reveal gallery-extra'
+        figs_lines.append(f'      <figure class="{cls}"><img src="assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>')
+    gallery_figs = '\n'.join(figs_lines)
+    extras_count = max(0, len(gallery_images) - GALLERY_INITIAL)
+    gallery_more_btn = ''
+    if extras_count > 0:
+        gallery_more_btn = f'''    <div class="galeria-more-wrap">
+      <button type="button" class="galeria-more-btn" id="galeriaMoreBtn" aria-expanded="false" aria-controls="galeriaGrid">
+        Ver mas eventos
+        <span class="galeria-more-count">({extras_count})</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+    </div>'''
 
     body = f'''{head}
 {nav}
@@ -818,9 +832,10 @@ def render_home(key, page):
   <div class="galeria-interior-inner">
     <h2>{escape(h2_eventos)}</h2>
     <p class="galeria-sub">Algunos de los eventos que hemos ambientado en Bogota.</p>
-    <div class="galeria-grid">
+    <div class="galeria-grid" id="galeriaGrid">
 {gallery_figs}
     </div>
+{gallery_more_btn}
   </div>
 </section>
 
