@@ -254,6 +254,7 @@ def navbar_html(depth):
 def footer_html(depth):
     nav = '\n'.join(f'        <li><a href="{link_to(s, depth)}">{escape(n)}</a></li>' for n, s in CATEGORIAS[:4] + [('Acarreos y Mudanzas', 'acarreos-trasteos-y-mudanzas-bogota')])
     estilos = '\n'.join(f'        <li><a href="{link_to(s, depth)}">{escape(n)}</a></li>' for n, s in ESTILO_MENU)
+    img_prefix = '../' * depth if depth else './'
     return f'''<footer class="footer">
   <div class="footer-inner">
     <div class="footer-col footer-brand">
@@ -263,6 +264,7 @@ def footer_html(depth):
         {WORDMARK}
       </a>
       <p class="footer-tag">Alquiler de mobiliario<br>para eventos en Bogota, Colombia</p>
+      <img class="footer-logo-img" src="{img_prefix}assets/img/ASEM-mobiliario-para-eventos-en-bogota.png" alt="ASEM mobiliario para eventos en bogota" loading="lazy" width="160" height="80">
     </div>
     <div class="footer-col">
       <span class="footer-col-title">Navegacion</span>
@@ -679,10 +681,10 @@ def render_home(key, page):
       </div>
     </a>''')
 
-    # gallery
+    # gallery — incluye TODAS las imagenes de eventos del Excel (no las 6 cat-cards ni el logo footer)
     gallery_figs = '\n'.join(
         f'      <figure class="reveal"><img src="assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>'
-        for img in gallery_images[:12])
+        for img in gallery_images)
 
     # Accesorios
     acc_items = [
@@ -829,6 +831,8 @@ def write_page(out_path, html):
 def write_sitemap():
     urls = []
     for key, p in DATA.items():
+        if key.startswith('00_'):
+            continue
         slug = p['slug']
         urls.append((f'{SITE}/{slug}/' if slug else f'{SITE}/', '2026-05-26'))
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',

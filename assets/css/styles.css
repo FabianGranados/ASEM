@@ -487,6 +487,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .footer-col a, .footer-col span.f-text { font-family: var(--font-body); font-weight: 300; font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.2s; display: inline-flex; align-items: center; gap: 10px; }
 .footer-col a:hover { color: var(--turquesa); }
 .footer-tag { font-family: var(--font-body); font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 16px; letter-spacing: 1px; }
+.footer-logo-img { margin-top: 24px; width: 160px; height: auto; opacity: 0.6; border-radius: 4px; }
 .footer-brand .brand-wordmark { margin-left: 0; }
 .footer-bottom { border-top: 1px solid rgba(64,176,203,0.08); padding-top: 32px; max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .footer-copy { font-family: var(--font-display); font-weight: 400; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.25); }
