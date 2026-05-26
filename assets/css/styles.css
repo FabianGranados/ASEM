@@ -397,6 +397,37 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .catalogo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; max-width: 1280px; margin: 0 auto; }
 .cat-card { position: relative; height: 400px; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--oscuro); display: block; }
+
+/* Tarjetas "Pronto" sin URL aun — fondo gradiente, no clickeables */
+.cat-card-pending {
+  cursor: default;
+  background: linear-gradient(135deg, var(--oscuro) 0%, var(--profundo) 60%, var(--turquesa) 100%);
+}
+.cat-card-pending::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(168,221,233,0.18), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(240,192,96,0.12), transparent 60%);
+  pointer-events: none;
+}
+.cat-card-pending .cat-card-overlay-rest { background: linear-gradient(to top, rgba(13,42,50,0.7) 0%, rgba(13,42,50,0) 60%); }
+.cat-card-pending:hover .cat-card-overlay-rest { opacity: 0; }
+.cat-card-pending:hover .cat-card-overlay-hover { opacity: 1; }
+.cat-card-soon {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 99px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blanco);
+}
 .cat-card img, .cat-card .cat-placeholder { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); display: block; }
 .cat-card:hover img, .cat-card:hover .cat-placeholder { transform: scale(1.06); }
 .cat-card-overlay-rest { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,42,50,0.85) 0%, rgba(13,42,50,0) 50%); display: flex; align-items: flex-end; padding: 28px; transition: opacity 0.35s; }
@@ -654,12 +685,44 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .btn-cotizar.desktop-only { display: none; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
   .stat:nth-child(2) { border-right: none; }
-  .catalogo-grid { grid-template-columns: repeat(2, 1fr); }
   .accesorios-grid { grid-template-columns: repeat(2, 1fr); }
   .galeria-grid { column-count: 2; }
   .referencias-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .ventajas ul { grid-template-columns: 1fr; }
+
+  /* Catalogo en mobile/tablet: swipe horizontal con scroll-snap */
+  .catalogo { padding-right: 0; padding-left: 0; }
+  .catalogo .section-head { padding: 0 5vw; }
+  .catalogo-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 5vw;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 5vw 24px;
+    margin: 0;
+    max-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--turquesa) transparent;
+  }
+  .catalogo-grid::-webkit-scrollbar { height: 4px; }
+  .catalogo-grid::-webkit-scrollbar-track { background: rgba(13,42,50,0.05); }
+  .catalogo-grid::-webkit-scrollbar-thumb { background: var(--turquesa); border-radius: 2px; }
+  .cat-card {
+    flex: 0 0 78%;
+    max-width: 360px;
+    height: 380px;
+    scroll-snap-align: start;
+  }
+  /* Hint visual del swipe (gradiente al borde derecho del primer viewport) */
+  .catalogo-grid::after {
+    content: '';
+    flex: 0 0 5vw;
+  }
 }
 @media (max-width: 767px) {
   .navbar { padding: 0 5vw; }
@@ -673,9 +736,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 32px 0; }
   .stat { border-right: none; border-bottom: 1px solid rgba(64,176,203,0.12); padding-bottom: 24px; }
   .stat:nth-last-child(-n+2) { border-bottom: none; padding-bottom: 0; }
-  .catalogo, .accesorios, .galeria-interior, .intro, .ventajas, .referencias { padding: 64px 5vw; }
+  .accesorios, .galeria-interior, .intro, .ventajas, .referencias { padding: 64px 5vw; }
+  .catalogo { padding-top: 64px; padding-bottom: 64px; }
   .cta-final { padding: 72px 5vw; }
-  .catalogo-grid { grid-template-columns: 1fr; }
+  .cat-card { flex: 0 0 85%; height: 340px; }
   .accesorios-grid { grid-template-columns: 1fr; }
   .galeria-grid { column-count: 1; }
   .referencias-grid { grid-template-columns: 1fr; }

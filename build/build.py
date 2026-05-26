@@ -681,6 +681,24 @@ def render_home(key, page):
       </div>
     </a>''')
 
+    # 3 tarjetas adicionales pendientes de URL final (Ferias, Silleteria, Accesorios)
+    pending_meta = [
+        ('FERIAS',     'Stands, montajes feriales y activaciones de marca.'),
+        ('SILLETERÍA', 'Sillas para bodas, banquetes y ceremonias de volumen.'),
+        ('ACCESORIOS', 'Calefactores, bombillos, pista LED y mas detalles.'),
+    ]
+    for h3_name, desc_ in pending_meta:
+        cards.append(f'''    <div class="cat-card cat-card-pending reveal" role="img" aria-label="{escape(h3_name)}">
+      <div class="cat-card-overlay-rest">
+        <h3 class="cat-card-name">{escape(h3_name)}</h3>
+      </div>
+      <div class="cat-card-overlay-hover">
+        <span class="cat-card-name">{escape(h3_name)}</span>
+        <p class="cat-card-desc">{escape(desc_)}</p>
+        <span class="cat-card-soon">Pronto</span>
+      </div>
+    </div>''')
+
     # gallery — incluye TODAS las imagenes de eventos del Excel (no las 6 cat-cards ni el logo footer)
     gallery_figs = '\n'.join(
         f'      <figure class="reveal"><img src="assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>'
