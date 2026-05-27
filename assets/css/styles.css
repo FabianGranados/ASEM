@@ -874,20 +874,143 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* acc-name como span (manteniendo estilo de h3 viejo) */
 .acc-card span.acc-name { display: block; }
 
-/* Floating WhatsApp */
+/* WhatsApp brand color override — todos los CTAs que abren WhatsApp */
+:root { --wa-green: #25D366; --wa-green-dark: #1ebd5a; }
+.btn.btn-wa,
+.btn-large.btn-wa,
+.btn-cotizar.btn-wa {
+  background: var(--wa-green);
+  color: #fff;
+  border-color: var(--wa-green);
+}
+.btn.btn-wa:hover,
+.btn-large.btn-wa:hover,
+.btn-cotizar.btn-wa:hover {
+  background: var(--wa-green-dark);
+  border-color: var(--wa-green-dark);
+  color: #fff;
+}
+
+/* Floating WhatsApp con burbuja de chat */
 .wa-float {
   position: fixed;
   bottom: 24px; right: 24px;
-  width: 56px; height: 56px;
-  background: #25D366;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   z-index: 200;
-  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
 }
-.wa-float:hover { transform: scale(1.08); }
-.wa-float svg { width: 28px; height: 28px; fill: #fff; }
+.wa-icon {
+  width: 72px;
+  height: 72px;
+  background: var(--wa-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 28px rgba(37,211,102,0.45), 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+.wa-icon svg { width: 40px; height: 40px; fill: #fff; }
+.wa-float:hover .wa-icon { transform: scale(1.06); box-shadow: 0 10px 32px rgba(37,211,102,0.6); }
+/* Pulse halo */
+.wa-icon::before,
+.wa-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--wa-green);
+  opacity: 0;
+  z-index: -1;
+  animation: wa-pulse 2.4s ease-out infinite;
+}
+.wa-icon::after { animation-delay: 1.2s; }
+@keyframes wa-pulse {
+  0%   { transform: scale(1);   opacity: 0.45; }
+  80%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* Burbuja de chat al lado del icono */
+.wa-bubble {
+  background: #fff;
+  border-radius: 18px 18px 4px 18px;
+  padding: 12px 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--oscuro);
+  line-height: 1.4;
+  max-width: 270px;
+  min-width: 220px;
+  min-height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  animation: wa-bubble-in 0.6s 1s ease-out backwards;
+}
+@keyframes wa-bubble-in {
+  from { opacity: 0; transform: translateX(8px) scale(0.95); }
+  to   { opacity: 1; transform: none; }
+}
+.wa-msgs {
+  position: relative;
+  width: 100%;
+  min-height: 20px;
+  transition: opacity 0.25s ease;
+}
+.wa-bubble.is-typing .wa-msgs { opacity: 0; pointer-events: none; }
+.wa-msg {
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.wa-msg.is-active { opacity: 1; position: relative; }
+/* Typing dots */
+.wa-typing {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 0 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.wa-bubble.is-typing .wa-typing { opacity: 1; }
+.wa-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #999;
+  animation: wa-dot 1.1s ease-in-out infinite;
+}
+.wa-typing span:nth-child(2) { animation-delay: 0.18s; }
+.wa-typing span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes wa-dot {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  40%      { opacity: 1;    transform: translateY(-3px); }
+}
+
+@media (max-width: 767px) {
+  .wa-float { bottom: 18px; right: 18px; gap: 10px; }
+  .wa-icon  { width: 62px; height: 62px; }
+  .wa-icon svg { width: 34px; height: 34px; }
+  .wa-bubble { max-width: 190px; min-width: 160px; font-size: 12.5px; padding: 9px 13px; line-height: 1.3; }
+}
+@media (max-width: 360px) {
+  /* Pantallas ultra chicas: solo el icono */
+  .wa-bubble { display: none; }
+}
 
 /* ============================================================ RESPONSIVE */
 /* Tablet: 3 columnas para catalogo */

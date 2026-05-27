@@ -56,6 +56,24 @@ document.documentElement.classList.add('js');
   start();
 })();
 
+/* WhatsApp floating bubble — rota frases con typing indicator (simula chat) */
+(function () {
+  var bubble = document.querySelector('.wa-bubble');
+  var msgs = document.querySelectorAll('.wa-msg');
+  if (!bubble || msgs.length < 2) return;
+  var idx = 0;
+  function rotate() {
+    bubble.classList.add('is-typing');
+    setTimeout(function () {
+      msgs[idx].classList.remove('is-active');
+      idx = (idx + 1) % msgs.length;
+      msgs[idx].classList.add('is-active');
+      bubble.classList.remove('is-typing');
+    }, 900);
+  }
+  setInterval(rotate, 3800);
+})();
+
 /* Showcase gallery — bg blureado sigue a la foto frontal, navegacion arrows + auto */
 (function () {
   var imgs = document.querySelectorAll('.showcase-img');

@@ -227,7 +227,7 @@ def navbar_html(depth):
     <div class="nav-item"><a href="{link_to('acarreos-trasteos-y-mudanzas-bogota', depth)}">Acarreos y Mudanzas</a></div>
   </div>
 
-  <a class="btn-cotizar desktop-only" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar ahora</a>
+  <a class="btn-cotizar btn-wa desktop-only" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar ahora</a>
   <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
@@ -252,7 +252,7 @@ def navbar_html(depth):
     </ul>
   </details>
   <a href="{link_to('acarreos-trasteos-y-mudanzas-bogota', depth)}">Acarreos, Trasteos y Mudanzas</a>
-  <a class="btn-cotizar" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar ahora</a>
+  <a class="btn-cotizar btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar ahora</a>
 </div>'''
 
 def footer_html(depth):
@@ -303,8 +303,19 @@ def footer_html(depth):
   </div>
 </footer>
 
-<a class="wa-float" href="{WA_LINK}" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.692 5.543l-.999 3.648 3.796-.99zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path></svg>
+<a class="wa-float" href="{WA_LINK}" target="_blank" rel="noopener" aria-label="Escribenos por WhatsApp">
+  <div class="wa-bubble" aria-hidden="true">
+    <div class="wa-msgs">
+      <span class="wa-msg is-active">Estas organizando un evento? Escribeme</span>
+      <span class="wa-msg">Ven, hablamos por WhatsApp</span>
+      <span class="wa-msg">Te asesoramos sin compromiso</span>
+      <span class="wa-msg">Cotizacion rapida en minutos</span>
+    </div>
+    <div class="wa-typing" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+  <div class="wa-icon">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.692 5.543l-.999 3.648 3.796-.99zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path></svg>
+  </div>
 </a>'''
 
 def head_html(title, description, canonical, depth, og_image_filename=None):
@@ -336,7 +347,7 @@ def cta_block(h2, h3, dorado=False):
     return f'''<section class="cta-block">
   <h2>{escape(h2)}</h2>
   <h3>{escape(h3)}</h3>
-  <a class="btn-large" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp
+  <a class="btn-large btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
 </section>'''
@@ -347,7 +358,7 @@ def cta_final_block():
   <span class="label reveal">Cuentanos</span>
   <div class="cta-final-headline reveal" role="heading" aria-level="2">Tienes un evento<br>en mente?</div>
   <p class="cta-final-sub reveal">Cuentanos y creamos el ambiente perfecto.</p>
-  <a class="btn-large reveal" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
+  <a class="btn-large btn-wa reveal" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
   <div class="cta-phones reveal">301 322 8490 &middot; 301 600 3031</div>
@@ -435,7 +446,7 @@ def render_subpage(key, page):
   <h1>{escape(h1)}</h1>
   <p class="hero-sub">{escape(desc)}</p>
   <div class="hero-ctas">
-    <a class="btn btn-turquesa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+    <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
     <a class="btn btn-outline-light" href="#galeria">Ver galeria</a>
   </div>
 </section>'''
@@ -587,7 +598,7 @@ def render_acarreos(key, page):
   <h3 class="acarreos-sub">PARA MERCANC&Iacute;AS, EVENTOS Y MUDANZAS.</h3>
   <p class="hero-sub">{escape(desc)}</p>
   <div class="hero-ctas">
-    <a class="btn btn-turquesa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+    <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
   </div>
 </section>
 
@@ -617,7 +628,7 @@ def render_acarreos(key, page):
 <section class="cta-block">
   <div class="cta-block-overhead" role="heading" aria-level="3">&iexcl;Cotizar Ahora!</div>
   <h2>o ll&aacute;manos al siguiente n&uacute;mero 301 6003031</h2>
-  <a class="btn-large" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp
+  <a class="btn-large btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
 </section>
@@ -750,7 +761,7 @@ def render_home(key, page):
     <p class="hero-subtitle anim anim-3">Con el mobiliario perfecto para cada tipo de evento en Bogota.</p>
     <div class="hero-ctas anim anim-4">
       <a href="#catalogo" class="btn btn-outline-light">Ver catalogo</a>
-      <a class="btn btn-turquesa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+      <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
     </div>
   </div>
   <div class="hero-dots" role="tablist" aria-label="Cambiar imagen del hero">
@@ -809,7 +820,7 @@ def render_home(key, page):
 <section class="cta-block">
   <h2>{escape(h2_habla)}</h2>
   <p class="cta-block-sub">Tienes dudas o necesitas una cotizacion rapida? Comunicate con nuestra area comercial y recibe asesoria personalizada para tu evento.</p>
-  <a class="btn-large" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
+  <a class="btn-large btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
 </section>
