@@ -1111,16 +1111,6 @@ def render_home(key, page):
   </a>
 </section>
 
-<section class="instagram-strip">
-  <span class="label">@alquilersalasparaeventos</span>
-  <h2>{escape(h2_ig)}</h2>
-  <h3>{escape(h3_siguenos)}</h3>
-  <a class="ig-link" href="https://instagram.com/alquilersalasparaeventos" target="_blank" rel="noopener">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>
-    Ver montajes recientes
-  </a>
-</section>
-
 <section class="showcase-section" id="eventos">
   <div class="showcase-bg" id="showcaseBg" style="background-image:url('{first_img_src}')" aria-hidden="true"></div>
   <div class="showcase-bg-overlay" aria-hidden="true"></div>
@@ -1160,6 +1150,16 @@ def render_home(key, page):
 {testimonios_block()}
 
 {faq_block()}
+
+<section class="instagram-strip">
+  <span class="label">@alquilersalasparaeventos</span>
+  <h2>{escape(h2_ig)}</h2>
+  <h3>{escape(h3_siguenos)}</h3>
+  <a class="ig-link" href="https://instagram.com/alquilersalasparaeventos" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>
+    Ver montajes recientes
+  </a>
+</section>
 
 {cta_final_block()}
 {footer_html(depth)}
