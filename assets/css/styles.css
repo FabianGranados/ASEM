@@ -361,6 +361,36 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
               radial-gradient(circle at 70% 80%, rgba(240,192,96,0.10), transparent 50%);
 }
 .hero-inner > * { position: relative; z-index: 1; }
+
+/* Hero interior con banner photo (background image + overlay oscuro) */
+.hero-inner.has-banner { padding: 140px 5vw 100px; min-height: 70vh; }
+.hero-inner.has-banner::before { display: none; }
+.hero-inner.has-banner .hero-banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transform: scale(1.02);
+}
+.hero-inner.has-banner .hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(13,42,50,0.55) 0%, rgba(13,42,50,0.35) 50%, rgba(13,42,50,0.75) 100%),
+    radial-gradient(circle at 30% 20%, rgba(64,176,203,0.15), transparent 50%);
+  z-index: 1;
+}
+/* Solo el contenido del hero recibe z-index alto, no los divs de fondo */
+.hero-inner.has-banner > .breadcrumbs,
+.hero-inner.has-banner > h1,
+.hero-inner.has-banner > .hero-sub,
+.hero-inner.has-banner > .hero-specs,
+.hero-inner.has-banner > .hero-ctas {
+  position: relative;
+  z-index: 2;
+}
 .hero-inner .breadcrumbs {
   font-family: var(--font-display);
   font-weight: 400;

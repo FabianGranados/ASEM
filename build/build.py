@@ -1157,6 +1157,7 @@ SUBPAGE_CUSTOM = {
     },
     '09_MOBILIARIO_LED': {
         'hero_subtitle': 'Mesas, barras, poltronas y mesas altas LED que transforman cualquier espacio. Colores ajustables, bater&iacute;a de 8-10 horas, ideales para fiestas nocturnas, c&oacute;cteles y eventos corporativos en Bogot&aacute;.',
+        'hero_banner': 'hero-led-banner.webp',
         # Specs rapidos visibles al lado del hero (B2B-friendly)
         'hero_specs': [
             ('M8 5h8 M10 3v2 M14 3v2 M9 8h6v9a3 3 0 0 1-3 3h0a3 3 0 0 1-3-3z', '8-10h bateria'),
@@ -1699,7 +1700,15 @@ def render_subpage(key, page):
     # Hero interior — usa hero_subtitle custom si existe, sino la meta description
     hero_sub = custom.get('hero_subtitle') or escape(desc)
     specs_html = render_specs_pills(custom.get('hero_specs'))
-    hero = f'''<section class="hero-inner">
+    # Banner background opcional (foto detras del texto)
+    banner = custom.get('hero_banner')
+    hero_class = 'hero-inner has-banner' if banner else 'hero-inner'
+    banner_html = ''
+    if banner:
+        banner_html = f'''  <div class="hero-banner-bg" style="background-image:url('../assets/img/{escape(banner)}')" aria-hidden="true"></div>
+  <div class="hero-banner-overlay" aria-hidden="true"></div>'''
+    hero = f'''<section class="{hero_class}">
+{banner_html}
   <div class="breadcrumbs"><a href="../">Inicio</a> &nbsp;&middot;&nbsp; {escape(h1.replace("Alquiler de ", "").replace(" en Bogotá para Eventos", ""))}</div>
   <h1>{escape(h1)}</h1>
   <p class="hero-sub">{hero_sub}</p>
