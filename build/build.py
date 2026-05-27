@@ -1300,13 +1300,14 @@ SUBPAGE_CUSTOM = {
     },
     '14_SEPARADORES_FILA': {
         'hero_subtitle': 'Postes separadores con cinta retr&aacute;ctil o cord&oacute;n para organizar entradas, accesos VIP, &aacute;reas restringidas y flujos de invitados en eventos sociales y empresariales.',
+        'hero_banner': 'hero-separadores-fila-banner.webp',
         'hero_specs': [
             ('M4 4v16 M10 4v16 M16 4v16 M22 4v16', 'Cinta retr&aacute;ctil 2m'),
             ('M12 2v4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M2 12h4 M18 12h4', 'Dorado, negro, rojo'),
             ('M9 12l2 2 4-4 M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z', 'Base pesada estable'),
             ('M3 7h18 M5 7v13h14V7', 'Montaje incluido'),
         ],
-        'gallery_keywords': ['separador', 'separadores', 'organizador', 'fila'],
+        'gallery_keywords': ['separador', 'separadores', 'organizador', 'fila', 'catenaria', 'catenarias'],
         'use_showcase': True,
         'productos_rich': [
             {'name': 'Postes con cinta retr&aacute;ctil', 'desc': 'El modelo m&aacute;s vers&aacute;til: cinta de 2 metros que se ajusta a cualquier espacio entre postes.',
@@ -2312,6 +2313,7 @@ def write_image_sitemap():
         ('hero-acapulco-banner.webp', 'Sillas Acapulco multicolor en jardin - ASEM'),
         ('hero-calefactores-banner.webp', 'Calefactores piramide para eventos al aire libre en Bogota - ASEM'),
         ('hero-salas-lounge-banner.webp', 'Salon de eventos con multiples salas lounge blancas y cojines negros - ASEM'),
+        ('hero-separadores-fila-banner.webp', 'Pasillo con alfombra roja y separadores de fila plateados para evento - ASEM'),
     ]
     for key, p in DATA.items():
         if key.startswith('00_'):
