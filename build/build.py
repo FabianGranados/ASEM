@@ -191,9 +191,12 @@ def schema_jsonld_home():
     }
     return '<script type="application/ld+json">' + _json.dumps(business, ensure_ascii=False, indent=2) + '</script>'
 
-def schema_jsonld_subpage(page):
-    """Schema.org JSON-LD para cada subpagina: Service + breadcrumbs."""
-    import json as _json
+def schema_jsonld_subpage(page, custom=None):
+    """Schema.org JSON-LD para cada subpagina: Service + Breadcrumbs.
+    Si hay datos custom (productos, faq), enriquece con hasOfferCatalog + FAQPage
+    para maximizar visibilidad en ChatGPT / Perplexity / Google AI Overviews."""
+    import json as _json, html as _html
+    custom = custom or {}
     slug = page.get('slug', '')
     title = page.get('Meta Title', '')
     desc = page.get('Meta Description', '')
@@ -202,30 +205,84 @@ def schema_jsonld_subpage(page):
         h1 = title
     images = page.get('images', [])
     image_url = f'{SITE}/assets/img/{images[0]["file"]}' if images else f'{SITE}/assets/img/hero-1-salas-lounge.webp'
-    graph = {
-        '@context': 'https://schema.org',
-        '@graph': [
-            {
-                '@type': 'Service',
-                '@id': f'{SITE}/{slug}/#service',
-                'name': h1,
-                'description': desc,
-                'serviceType': 'Alquiler de mobiliario para eventos',
-                'provider': {'@id': f'{SITE}/#business'},
-                'areaServed': {'@type': 'City', 'name': 'Bogotá'},
-                'url': f'{SITE}/{slug}/',
-                'image': image_url,
-            },
-            {
-                '@type': 'BreadcrumbList',
-                'itemListElement': [
-                    {'@type': 'ListItem', 'position': 1, 'name': 'Inicio', 'item': SITE + '/'},
-                    {'@type': 'ListItem', 'position': 2, 'name': h1, 'item': f'{SITE}/{slug}/'},
-                ],
-            },
+
+    # Service base
+    service = {
+        '@type': 'Service',
+        '@id': f'{SITE}/{slug}/#service',
+        'name': h1,
+        'description': desc,
+        'serviceType': 'Alquiler de mobiliario para eventos',
+        'provider': {'@id': f'{SITE}/#business'},
+        'areaServed': [
+            {'@type': 'City', 'name': 'Bogotá'},
+            {'@type': 'AdministrativeArea', 'name': 'Cundinamarca, Colombia'},
         ],
+        'url': f'{SITE}/{slug}/',
+        'image': image_url,
+        # Hereda el rating del LocalBusiness — refuerza confianza en cada subpagina
+        'aggregateRating': {
+            '@type': 'AggregateRating',
+            'ratingValue': '4.7',
+            'reviewCount': '90',
+            'bestRating': '5',
+        },
     }
-    return '<script type="application/ld+json">' + _json.dumps(graph, ensure_ascii=False, indent=2) + '</script>'
+    # hasOfferCatalog si hay productos enriquecidos
+    if custom.get('productos_rich'):
+        # Limpiar entidades HTML del 'name' para JSON-LD
+        def clean(s):
+            return _html.unescape(s).replace('&nbsp;', ' ')
+        service['hasOfferCatalog'] = {
+            '@type': 'OfferCatalog',
+            'name': f'{h1} — opciones disponibles',
+            'itemListElement': [
+                {
+                    '@type': 'Offer',
+                    'itemOffered': {
+                        '@type': 'Product',
+                        'name': clean(p['name']),
+                        'description': clean(p['desc']),
+                        'category': 'Alquiler de mobiliario para eventos',
+                    },
+                    'availability': 'https://schema.org/InStock',
+                    'priceCurrency': 'COP',
+                }
+                for p in custom['productos_rich']
+            ],
+        }
+
+    graph = [
+        service,
+        {
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {'@type': 'ListItem', 'position': 1, 'name': 'Inicio', 'item': SITE + '/'},
+                {'@type': 'ListItem', 'position': 2, 'name': h1, 'item': f'{SITE}/{slug}/'},
+            ],
+        },
+    ]
+    # FAQPage si hay FAQs especificas para esta subpagina
+    if custom.get('faq'):
+        def clean(s):
+            return _html.unescape(s).replace('&nbsp;', ' ')
+        graph.append({
+            '@type': 'FAQPage',
+            '@id': f'{SITE}/{slug}/#faq',
+            'mainEntity': [
+                {
+                    '@type': 'Question',
+                    'name': clean(f['q']),
+                    'acceptedAnswer': {'@type': 'Answer', 'text': clean(f['a'])},
+                }
+                for f in custom['faq']
+            ],
+        })
+
+    return '<script type="application/ld+json">' + _json.dumps({
+        '@context': 'https://schema.org',
+        '@graph': graph,
+    }, ensure_ascii=False, indent=2) + '</script>'
 
 # Map "MOBILIARIO X" labels (uppercase, may include tilde) to slug + display name + intro text
 ESTILOS = {
@@ -629,6 +686,192 @@ def faq_block():
   </div>
 </section>'''
 
+# ============================================================
+# Datos especificos por subpagina (copy enriquecido + FAQ + productos)
+# ============================================================
+SUBPAGE_CUSTOM = {
+    '09_MOBILIARIO_LED': {
+        'hero_subtitle': 'Mesas, barras, poltronas y mesas altas LED que transforman cualquier espacio. Colores ajustables, bater&iacute;a de 8-10 horas, ideales para fiestas nocturnas, c&oacute;cteles y eventos corporativos en Bogot&aacute;.',
+        'productos_rich': [
+            {
+                'name': 'Mesas iluminadas LED',
+                'desc': 'Mesas centrales y de cubo iluminadas que cambian entre 16 colores.',
+                'icon': 'M3 8h18v9H3z M3 8l3-3h12l3 3 M9 17v3 M15 17v3',
+            },
+            {
+                'name': 'Barras LED para c&oacute;cteles',
+                'desc': 'Barras modulares con frente iluminado para open bar y servicio de bebidas.',
+                'icon': 'M3 7h18v3H3z M5 10v10h14V10 M9 14h6',
+            },
+            {
+                'name': 'Poltronas y sillas LED',
+                'desc': 'Sillones, puff y sillas con luz interior para zonas lounge y descanso.',
+                'icon': 'M5 11h14v9H5z M7 11V7a5 5 0 0 1 10 0v4',
+            },
+            {
+                'name': 'Mesas altas LED',
+                'desc': 'Mesas tipo cocktail iluminadas, perfectas para eventos de pie.',
+                'icon': 'M6 4h12v3H6z M9 7v13 M15 7v13 M5 20h14',
+            },
+        ],
+        'ventajas_rich': [
+            {
+                'title': 'Impacto visual &uacute;nico',
+                'desc': '16 colores RGB ajustables v&iacute;a control remoto. Sincronizable con el ambiente o cambio autom&aacute;tico al ritmo de la m&uacute;sica.',
+            },
+            {
+                'title': 'Bater&iacute;a de 8 a 10 horas',
+                'desc': 'Sin cables visibles, sin necesidad de toma corriente. Te damos las piezas cargadas al 100% para que las ubiques donde quieras.',
+            },
+            {
+                'title': 'Resistente para interior y exterior',
+                'desc': 'Acabado tratado contra salpicaduras y polvo. Apto para terrazas y jardines (con cobertura si hay riesgo de lluvia fuerte).',
+            },
+            {
+                'title': 'Servicio completo incluido',
+                'desc': 'Entrega, montaje, controles remotos, asistencia t&eacute;cnica durante el evento y recogida posterior. Tu solo disfrutas.',
+            },
+        ],
+        'faq': [
+            {
+                'q': '&iquest;El mobiliario LED funciona con bater&iacute;a o necesita corriente?',
+                'a': 'Todo nuestro mobiliario LED viene con bater&iacute;a recargable interna de 8 a 10 horas de autonom&iacute;a. No requiere cables ni toma corriente durante el evento, lo que te permite ubicar las piezas en cualquier punto del espacio (centro de pista, jardines, terrazas, etc.).',
+            },
+            {
+                'q': '&iquest;Cu&aacute;nto dura la carga de las bater&iacute;as?',
+                'a': 'Cada pieza LED tiene entre 8 y 10 horas de autonom&iacute;a con una sola carga, suficiente para cualquier evento est&aacute;ndar. Las entregamos cargadas al 100%. Para eventos extendidos podemos coordinar cargas intermedias o intercambio de unidades.',
+            },
+            {
+                'q': '&iquest;Se pueden cambiar los colores durante el evento?',
+                'a': 'S&iacute;. Cada pieza incluye control remoto con 16 colores fijos, modos de fade gradual y cambio autom&aacute;tico sincronizado. Te dejamos los controles para que ajustes el ambiente seg&uacute;n el momento del evento (m&aacute;s sutil para c&oacute;ctel, m&aacute;s din&aacute;mico para fiesta).',
+            },
+            {
+                'q': '&iquest;Es seguro y resistente para uso al aire libre?',
+                'a': 'S&iacute;. El mobiliario LED tiene acabado resistente a salpicaduras y polvo (apto IP54 en su mayor&iacute;a). Funciona perfectamente en terrazas, jardines y eventos al aire libre. Para zonas con riesgo de lluvia fuerte recomendamos cubierta tipo carpa.',
+            },
+            {
+                'q': '&iquest;Qu&eacute; tipos de mobiliario LED tienen disponibles?',
+                'a': 'Contamos con mesas iluminadas (centrales, de cubo y altas), barras LED para c&oacute;cteles, sillas y poltronas LED, puff iluminados y sets completos de sala LED. Tambi&eacute;n combinamos con pista de baile LED Infinity 3D para eventos completos.',
+            },
+            {
+                'q': '&iquest;Cu&aacute;nto cuesta alquilar mobiliario LED en Bogot&aacute;?',
+                'a': 'El precio depende de la cantidad de piezas, el tipo (mesa, barra, silla, sala completa), la duraci&oacute;n y la ubicaci&oacute;n del evento. Cotizamos por WhatsApp en minutos con propuesta clara y precio cerrado. Escr&iacute;benos al 301 322 8490 con los detalles de tu evento.',
+            },
+        ],
+        # Indices de REVIEWS a mostrar (Stefania, Jhon, AnFerTM — los mas relevantes para LED)
+        'testimonios_indices': [0, 2, 4],
+    },
+}
+
+def render_productos_rich(productos):
+    """Renderiza productos como cards con iconos SVG (cuando hay datos enriquecidos)."""
+    cards = []
+    for p in productos:
+        icon_paths = ''.join(f'<path d="{seg.strip()}"/>' for seg in p['icon'].split('M') if seg.strip()).replace('<path d="', '<path d="M')
+        cards.append(f'''      <div class="producto-card reveal">
+        <svg class="producto-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{icon_paths}</svg>
+        <div class="producto-name">{p['name']}</div>
+        <div class="producto-desc">{p['desc']}</div>
+      </div>''')
+    return f'''<section class="productos-section reveal">
+  <div class="productos-inner">
+    <span class="label">Productos disponibles</span>
+    <div class="productos-grid">
+{chr(10).join(cards)}
+    </div>
+  </div>
+</section>'''
+
+def render_ventajas_rich(title, items, tag='h2'):
+    """Renderiza ventajas con icono check + titulo + descripcion rica (en lugar de bullets simples)."""
+    lis = []
+    for item in items:
+        lis.append(f'''      <div class="ventaja-rich reveal">
+        <div class="ventaja-rich-check" aria-hidden="true">&#10003;</div>
+        <div class="ventaja-rich-body">
+          <div class="ventaja-rich-title">{item['title']}</div>
+          <div class="ventaja-rich-desc">{item['desc']}</div>
+        </div>
+      </div>''')
+    return f'''<section class="ventajas ventajas-rich reveal">
+  <div class="ventajas-inner">
+    <{tag}>{escape(title)}</{tag}>
+    <div class="ventajas-rich-grid">
+{chr(10).join(lis)}
+    </div>
+  </div>
+</section>'''
+
+def render_faq_subpage(faqs, eyebrow='Preguntas frecuentes', title='Lo que m&aacute;s nos preguntan'):
+    """FAQ section reusable para subpaginas con preguntas especificas de la categoria."""
+    items = []
+    for f in faqs:
+        items.append(f'''      <details class="faq-item reveal">
+        <summary>
+          <span class="faq-q">{f['q']}</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">{f['a']}</div>
+      </details>''')
+    return f'''<section class="faq-section" id="faq" aria-labelledby="faq-sub-title">
+  <div class="faq-inner">
+    <div class="faq-head reveal">
+      <span class="label">{eyebrow}</span>
+      <h2 id="faq-sub-title">{title}</h2>
+      <p class="faq-sub">&iquest;Algo m&aacute;s? Escr&iacute;benos por WhatsApp y te respondemos en minutos.</p>
+    </div>
+    <div class="faq-list">
+{chr(10).join(items)}
+    </div>
+  </div>
+</section>'''
+
+def render_testimonios_subpage(review_indices):
+    """Testimonios reducidos (3 cards) para subpaginas. Usa indices de REVIEWS."""
+    items = []
+    for idx in review_indices:
+        if idx >= len(REVIEWS): continue
+        r = REVIEWS[idx]
+        initial = r['author'][0].upper()
+        stars = '★' * int(r['rating'])
+        date_label = {
+            '2025-05-15': 'Hace un año',
+            '2025-09-20': 'Hace 8 meses',
+            '2025-07-22': 'Hace 10 meses',
+            '2025-12-15': 'Hace 5 meses',
+            '2025-11-18': 'Hace 6 meses',
+        }.get(r['date'], '')
+        items.append(f'''      <article class="testimonio reveal">
+        <div class="testimonio-head">
+          <div class="testimonio-avatar" aria-hidden="true">{escape(initial)}</div>
+          <div class="testimonio-meta">
+            <div class="testimonio-name">{escape(r['author'])}</div>
+            <div class="testimonio-date">
+              <span class="testimonio-stars" aria-label="{r['rating']} de 5 estrellas">{stars}</span>
+              <span>&middot; {escape(date_label)}</span>
+            </div>
+          </div>
+        </div>
+        <blockquote class="testimonio-text">{escape(r['short'])}</blockquote>
+      </article>''')
+    return f'''<section class="testimonios-section testimonios-section-sub" aria-labelledby="testi-sub">
+  <div class="testimonios-inner">
+    <div class="testimonios-head reveal">
+      <span class="label">Rese&ntilde;as</span>
+      <h2 id="testi-sub">Quienes ya nos eligieron</h2>
+      <a class="testimonios-rating" href="https://www.google.com/search?q=ASEM+alquiler+salas+y+mobiliario+bogota" target="_blank" rel="noopener">
+        <span class="testimonios-rating-num">4.7</span>
+        <span class="testimonios-rating-stars" aria-hidden="true">★★★★★</span>
+        <span class="testimonios-rating-meta">en Google &middot; 90 rese&ntilde;as</span>
+      </a>
+    </div>
+    <div class="testimonios-grid testimonios-grid-3">
+{chr(10).join(items)}
+    </div>
+  </div>
+</section>'''
+
+
 def cta_final_block():
     """Bloque final dorado con boton WhatsApp verde — climax visual antes del footer.
     Headline no usa h1/h2/h3 para no inflar las cuentas SEO del Excel."""
@@ -702,6 +945,7 @@ def render_subpage(key, page):
     h4s = page.get('H4 (todos)', []) or []
     images = page.get('images', []) or []
     content = parse_contenido(page.get('CONTENIDO COMPLETO', ''))
+    custom = SUBPAGE_CUSTOM.get(key, {})  # datos enriquecidos opcionales
 
     # Identify H2s by role (Ventajas, ¿Quieres/¿Listo, Otras Referencias)
     h2_ventajas = next((h for h in h2s if h.lower().startswith('ventajas')), None)
@@ -716,14 +960,15 @@ def render_subpage(key, page):
 
     head = head_html(title, desc, slug, depth,
                      og_image_filename=images[0]['file'] if images else None,
-                     jsonld=schema_jsonld_subpage(page))
+                     jsonld=schema_jsonld_subpage(page, custom))
     nav = navbar_html(depth)
 
-    # Hero interior
+    # Hero interior — usa hero_subtitle custom si existe, sino la meta description
+    hero_sub = custom.get('hero_subtitle') or escape(desc)
     hero = f'''<section class="hero-inner">
   <div class="breadcrumbs"><a href="../">Inicio</a> &nbsp;&middot;&nbsp; {escape(h1.replace("Alquiler de ", "").replace(" en Bogotá para Eventos", ""))}</div>
   <h1>{escape(h1)}</h1>
-  <p class="hero-sub">{escape(desc)}</p>
+  <p class="hero-sub">{hero_sub}</p>
   <div class="hero-ctas">
     <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
     <a class="btn btn-outline-light" href="#galeria">Ver galeria</a>
@@ -736,8 +981,13 @@ def render_subpage(key, page):
         paras = [p for p in content['intro'].split('\n\n') if p.strip()]
         intro_paragraphs = '\n'.join(f'    <p class="lead">{escape(p)}</p>' if i == 0 else f'    <p>{escape(p)}</p>'
                                      for i, p in enumerate(paras))
+    # Productos: usa el bloque rich con icons si hay datos enriquecidos,
+    # sino la linea simple del Excel
+    productos_rich_html = ''
     productos_block = ''
-    if content.get('productos'):
+    if custom.get('productos_rich'):
+        productos_rich_html = render_productos_rich(custom['productos_rich'])
+    elif content.get('productos'):
         productos_block = f'    <p><strong>Productos:</strong> {" &middot; ".join(escape(p) for p in content["productos"])}</p>'
     intro_html = ''
     if intro_paragraphs or productos_block:
@@ -773,7 +1023,10 @@ def render_subpage(key, page):
     ventajas_title = h2_ventajas or h3_ventajas
     ventajas_tag = 'h2' if h2_ventajas else ('h3' if h3_ventajas else None)
     ventajas_html = ''
-    if ventajas_title and content.get('ventajas'):
+    # Si hay datos enriquecidos en custom, usa el grid rich (titulo + descripcion por item)
+    if ventajas_title and custom.get('ventajas_rich'):
+        ventajas_html = render_ventajas_rich(ventajas_title, custom['ventajas_rich'], tag=ventajas_tag)
+    elif ventajas_title and content.get('ventajas'):
         lis = '\n'.join(f'      <li>{escape(v)}</li>' for v in content['ventajas'])
         ventajas_html = f'''<section class="ventajas reveal">
   <div class="ventajas-inner">
@@ -789,6 +1042,10 @@ def render_subpage(key, page):
     <{ventajas_tag}>{escape(ventajas_title)}</{ventajas_tag}>
   </div>
 </section>'''
+
+    # FAQ y Testimonios opcionales (cuando hay datos custom para esta subpagina)
+    faq_html_sub = render_faq_subpage(custom['faq']) if custom.get('faq') else ''
+    testimonios_html_sub = render_testimonios_subpage(custom['testimonios_indices']) if custom.get('testimonios_indices') else ''
 
     # CTA block
     cta_html = ''
@@ -842,9 +1099,12 @@ def render_subpage(key, page):
 {nav}
 {hero}
 {intro_html}
+{productos_rich_html}
 {gallery_html}
 {ventajas_html}
+{testimonios_html_sub}
 {cta_html}
+{faq_html_sub}
 {referencias_html}
 {cta_final_block()}
 {footer_html(depth)}

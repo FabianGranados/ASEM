@@ -947,6 +947,99 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .faq-a { padding: 0 18px 18px; font-size: 14.5px; }
 }
 
+/* ============================================================ PRODUCTOS RICH (subpaginas) */
+.productos-section { background: var(--blanco); padding: 64px 5vw; }
+.productos-inner { max-width: 1080px; margin: 0 auto; }
+.productos-inner .label { display: block; margin-bottom: 24px; text-align: center; }
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.producto-card {
+  border: 1px solid rgba(13,42,50,0.08);
+  border-radius: 8px;
+  padding: 24px 20px;
+  background: var(--neutro);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.producto-card:hover {
+  border-color: var(--turquesa);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13,42,50,0.06);
+}
+.producto-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--turquesa);
+  margin-bottom: 16px;
+  stroke-width: 1.4;
+}
+.producto-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--oscuro);
+  margin-bottom: 8px;
+}
+.producto-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--gris);
+  line-height: 1.6;
+}
+@media (max-width: 1023px) { .productos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px)  { .productos-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================ VENTAJAS RICH (subpaginas) */
+.ventajas-rich-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 36px;
+}
+.ventaja-rich { display: flex; gap: 16px; align-items: flex-start; }
+.ventaja-rich-check {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--turquesa);
+  color: var(--blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 2px;
+}
+.ventaja-rich-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: var(--oscuro);
+  margin-bottom: 6px;
+}
+.ventaja-rich-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14.5px;
+  color: var(--gris);
+  line-height: 1.65;
+}
+@media (max-width: 767px) { .ventajas-rich-grid { grid-template-columns: 1fr; } }
+
+/* Testimonios variante 3 columnas (para subpaginas) */
+.testimonios-grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1023px) {
+  .testimonios-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .testimonios-grid-3 { grid-template-columns: 1fr; }
+}
+
 /* ============================================================ CTA FINAL */
 .cta-final { background: var(--oscuro); padding: 110px 5vw; text-align: center; }
 .cta-final h2 { font-family: var(--font-display); font-weight: 200; font-size: clamp(36px, 5.6vw, 60px); letter-spacing: 3px; line-height: 1.1; color: var(--blanco); margin-bottom: 24px; }
