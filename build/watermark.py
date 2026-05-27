@@ -44,7 +44,9 @@ def get_font(size: int):
     return ImageFont.load_default()
 
 def add_watermark(image_path: Path) -> bool:
-    """Agrega 'ASEM' sutil en esquina inferior derecha. Devuelve True si proceso OK."""
+    """Watermark 'ASEM' centrado con colores de marca (A blanco, S turquesa,
+    E suave, M dorado) semi-transparente. Posicion centrada = mas dificil de
+    cropear sin destruir la imagen."""
     try:
         img = Image.open(image_path)
     except Exception as e:
@@ -54,44 +56,55 @@ def add_watermark(image_path: Path) -> bool:
     fmt = img.format or 'PNG'
     W, H = img.size
 
-    # Skip si la imagen es muy pequena (probablemente icono)
     if max(W, H) < 300:
         return False
 
-    # Tamano de fuente: 5% del lado mayor (mas grande para ser visible incluso
-    # cuando la imagen se reduce/crop en cards). Minimo absoluto 24px.
-    font_size = max(24, int(max(W, H) * 0.05))
+    # Tamano grande para que sea dificil cropear: 22% del lado mayor
+    font_size = max(48, int(max(W, H) * 0.22))
     font = get_font(font_size)
-    text = 'ASEM'
 
-    # Trabajar en RGBA para soporte de transparencia del overlay
+    # Colores de marca de ASEM (mismos que el wordmark del navbar/footer)
+    # Alpha 110/255 (~43%) — suficiente para identificar, no para tapar la foto
+    ALPHA = 110
+    letters = [
+        ('A', (255, 255, 255, ALPHA)),   # blanco
+        ('S', (64, 176, 203, ALPHA)),    # turquesa
+        ('E', (168, 221, 233, ALPHA)),   # suave
+        ('M', (240, 192, 96, ALPHA)),    # dorado
+    ]
+
+    # Trabajar en RGBA para soporte de transparencia
     img_rgba = img.convert('RGBA') if img.mode != 'RGBA' else img
     overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
-    # Calcular bounding box del texto
-    bbox = draw.textbbox((0, 0), text, font=font)
-    text_w = bbox[2] - bbox[0]
-    text_h = bbox[3] - bbox[1]
+    # Medir cada letra y calcular spacing tipo navbar (letter-spacing generoso)
+    letter_metrics = []
+    for ch, _ in letters:
+        bbox = draw.textbbox((0, 0), ch, font=font)
+        letter_metrics.append({'w': bbox[2] - bbox[0], 'h': bbox[3] - bbox[1], 'top': bbox[1]})
 
-    # Posicion: esquina inferior derecha con margen 3% del lado mayor
-    margin = int(max(W, H) * 0.03)
-    x = W - text_w - margin
-    y = H - text_h - margin - bbox[1]
+    letter_spacing = int(font_size * 0.18)  # gap entre letras
+    total_w = sum(m['w'] for m in letter_metrics) + letter_spacing * (len(letters) - 1)
+    max_h = max(m['h'] for m in letter_metrics)
 
-    # Pad y radio para la "pill" de fondo (mejora legibilidad sobre cualquier color)
-    pad_x = max(8, font_size // 4)
-    pad_y = max(4, font_size // 8)
-    pill_box = [x - pad_x, y - pad_y, x + text_w + pad_x, y + text_h + pad_y]
-    # Dibujar pill semi-transparente oscuro
-    draw.rounded_rectangle(pill_box, radius=pad_y + 4, fill=(0, 0, 0, 110))
+    # Centrar horizontal y vertical
+    start_x = (W - total_w) / 2
+    y = (H - max_h) / 2 - letter_metrics[0]['top']
 
-    # Sombra del texto (refuerzo)
-    shadow_offset = max(1, font_size // 18)
-    draw.text((x + shadow_offset, y + shadow_offset), text,
-              font=font, fill=(0, 0, 0, 160))
-    # Texto principal blanco mucho mas opaco
-    draw.text((x, y), text, font=font, fill=(255, 255, 255, 235))
+    # Stroke (outline) negro semi-transparente para que las letras sean
+    # legibles sobre cualquier fondo (claro u oscuro)
+    stroke_w = max(2, font_size // 60)
+
+    current_x = start_x
+    for i, (ch, color) in enumerate(letters):
+        try:
+            draw.text((current_x, y), ch, font=font, fill=color,
+                      stroke_width=stroke_w, stroke_fill=(0, 0, 0, 90))
+        except TypeError:
+            # Pillow viejos sin stroke_width
+            draw.text((current_x, y), ch, font=font, fill=color)
+        current_x += letter_metrics[i]['w'] + letter_spacing
 
     watermarked = Image.alpha_composite(img_rgba, overlay)
 
