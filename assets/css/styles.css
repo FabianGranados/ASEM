@@ -772,6 +772,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .btn-large:hover { background: #E0B050; transform: translateY(-2px); }
 .cta-phones { margin-top: 30px; font-family: var(--font-display); font-weight: 400; font-size: 13px; letter-spacing: 3px; color: rgba(64,176,203,0.6); }
 
+/* CTA final variante DORADA — climax visual antes del footer */
+.cta-final-gold { background: var(--dorado); }
+.cta-final-gold .label { color: rgba(13,42,50,0.7); }
+.cta-final-gold .cta-final-headline { color: var(--oscuro); }
+.cta-final-gold .cta-final-sub { color: rgba(13,42,50,0.75); }
+.cta-final-gold .cta-phones { color: rgba(13,42,50,0.55); }
+/* El boton ya tiene .btn-wa que lo pone verde, pero reforzamos por especificidad */
+.cta-final-gold .btn-large.btn-wa { background: var(--wa-green); color: #fff; box-shadow: 0 8px 24px rgba(13,42,50,0.18); }
+.cta-final-gold .btn-large.btn-wa:hover { background: var(--wa-green-dark); }
+
 /* ============================================================ FOOTER */
 .footer { background: var(--muy-oscuro); padding: 64px 5vw 32px; }
 .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; }
