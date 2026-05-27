@@ -720,24 +720,15 @@ def render_home(key, page):
       </div>
     </a>''')
 
-    # gallery — incluye TODAS las imagenes de eventos del Excel (no las 6 cat-cards ni el logo footer)
-    # Las primeras 8 visibles; resto colapsado tras boton "Ver mas eventos" (los <img> siguen en el HTML para SEO)
-    GALLERY_INITIAL = 8
-    figs_lines = []
+    # gallery — showcase interactivo (1 foto al frente + misma foto blureada al fondo)
+    # Todos los <img> renderizados (SEO intacto), solo 1 visible. Navegacion arrows + auto.
+    showcase_imgs = []
     for i, img in enumerate(gallery_images):
-        cls = 'reveal' if i < GALLERY_INITIAL else 'reveal gallery-extra'
-        figs_lines.append(f'      <figure class="{cls}"><img src="assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>')
-    gallery_figs = '\n'.join(figs_lines)
-    extras_count = max(0, len(gallery_images) - GALLERY_INITIAL)
-    gallery_more_btn = ''
-    if extras_count > 0:
-        gallery_more_btn = f'''    <div class="galeria-more-wrap">
-      <button type="button" class="galeria-more-btn" id="galeriaMoreBtn" aria-expanded="false" aria-controls="galeriaGrid">
-        Ver mas eventos
-        <span class="galeria-more-count">({extras_count})</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-      </button>
-    </div>'''
+        cls = 'showcase-img is-active' if i == 0 else 'showcase-img'
+        showcase_imgs.append(f'      <img class="{cls}" src="assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" data-idx="{i}" loading="lazy">')
+    showcase_html = '\n'.join(showcase_imgs)
+    first_img_src = f'assets/img/{escape(gallery_images[0]["file"])}' if gallery_images else ''
+    gallery_total = len(gallery_images)
 
     body = f'''{head}
 {nav}
@@ -829,14 +820,39 @@ def render_home(key, page):
   </a>
 </section>
 
-<section class="galeria-interior" id="eventos">
-  <div class="galeria-interior-inner">
-    <h2>{escape(h2_eventos)}</h2>
-    <p class="galeria-sub">Algunos de los eventos que hemos ambientado en Bogota.</p>
-    <div class="galeria-grid" id="galeriaGrid">
-{gallery_figs}
+<section class="showcase-section" id="eventos">
+  <div class="showcase-bg" id="showcaseBg" style="background-image:url('{first_img_src}')" aria-hidden="true"></div>
+  <div class="showcase-bg-overlay" aria-hidden="true"></div>
+
+  <div class="showcase-head">
+    <span class="label on-dark">Galeria</span>
+    <h2 class="on-dark">{escape(h2_eventos)}</h2>
+    <p class="showcase-sub">Algunos de los eventos que hemos ambientado en Bogota.</p>
+  </div>
+
+  <div class="showcase" id="showcase">
+    <button class="showcase-arrow showcase-prev" id="showcasePrev" type="button" aria-label="Foto anterior">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </button>
+
+    <div class="showcase-frame">
+      <div class="showcase-imgs" id="showcaseImgs">
+{showcase_html}
+      </div>
     </div>
-{gallery_more_btn}
+
+    <button class="showcase-arrow showcase-next" id="showcaseNext" type="button" aria-label="Foto siguiente">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+    </button>
+  </div>
+
+  <div class="showcase-footer">
+    <div class="showcase-caption" id="showcaseCaption">{escape(gallery_images[0]["alt"]) if gallery_images else ""}</div>
+    <div class="showcase-counter">
+      <span class="showcase-current" id="showcaseCurrent">01</span>
+      <span class="showcase-divider">/</span>
+      <span class="showcase-total">{gallery_total:02d}</span>
+    </div>
   </div>
 </section>
 

@@ -56,16 +56,70 @@ document.documentElement.classList.add('js');
   start();
 })();
 
-/* Galeria "Ver mas eventos" — toggle expand/collapse */
+/* Showcase gallery — bg blureado sigue a la foto frontal, navegacion arrows + auto */
 (function () {
-  var btn = document.getElementById('galeriaMoreBtn');
-  var grid = document.getElementById('galeriaGrid');
-  if (!btn || !grid) return;
-  btn.addEventListener('click', function () {
-    var expanded = grid.classList.toggle('expanded');
-    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    btn.firstChild.textContent = (expanded ? 'Ver menos eventos ' : 'Ver mas eventos ');
+  var imgs = document.querySelectorAll('.showcase-img');
+  var bg = document.getElementById('showcaseBg');
+  var prev = document.getElementById('showcasePrev');
+  var next = document.getElementById('showcaseNext');
+  var current = document.getElementById('showcaseCurrent');
+  var caption = document.getElementById('showcaseCaption');
+  if (!imgs.length || !bg) return;
+  var idx = 0;
+  var timer = null;
+  var INTERVAL = 5000;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function show(n) {
+    idx = (n + imgs.length) % imgs.length;
+    imgs.forEach(function (img, i) { img.classList.toggle('is-active', i === idx); });
+    bg.style.backgroundImage = "url('" + imgs[idx].getAttribute('src') + "')";
+    if (current) current.textContent = pad(idx + 1);
+    if (caption) caption.textContent = imgs[idx].getAttribute('alt') || '';
+  }
+  function nextImg() { show(idx + 1); }
+  function prevImg() { show(idx - 1); }
+  function start() { stop(); timer = setInterval(nextImg, INTERVAL); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function reset() { stop(); start(); }
+
+  if (next) next.addEventListener('click', function () { nextImg(); reset(); });
+  if (prev) prev.addEventListener('click', function () { prevImg(); reset(); });
+
+  // Keyboard arrows when showcase visible
+  document.addEventListener('keydown', function (e) {
+    var section = document.getElementById('eventos');
+    if (!section) return;
+    var rect = section.getBoundingClientRect();
+    if (rect.top > window.innerHeight || rect.bottom < 0) return;
+    if (e.key === 'ArrowRight') { nextImg(); reset(); }
+    if (e.key === 'ArrowLeft')  { prevImg(); reset(); }
   });
+
+  // Touch swipe on mobile
+  var frame = document.querySelector('.showcase-frame');
+  if (frame) {
+    var startX = 0, startY = 0;
+    frame.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    frame.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) nextImg(); else prevImg();
+        reset();
+      }
+    }, { passive: true });
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+
+  start();
 })();
 
 /* Scroll reveal */
