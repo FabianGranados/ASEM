@@ -603,6 +603,12 @@ def head_html(title, description, canonical, depth, og_image_filename=None, json
 <meta name="author" content="ASEM Alquiler de Salas y Mobiliario">
 <meta name="geo.region" content="CO-CUN">
 <meta name="geo.placename" content="Bogotá">
+<meta name="theme-color" content="#0D2A32">
+<link rel="icon" type="image/x-icon" href="{asset('favicon.ico', depth)}">
+<link rel="icon" type="image/png" sizes="16x16" href="{asset('favicon-16x16.png', depth)}">
+<link rel="icon" type="image/png" sizes="32x32" href="{asset('favicon-32x32.png', depth)}">
+<link rel="apple-touch-icon" sizes="180x180" href="{asset('apple-touch-icon.png', depth)}">
+<link rel="manifest" href="{asset('manifest.json', depth)}">
 <link rel="stylesheet" href="{css_path}">
 {jsonld}
 </head>
@@ -1875,6 +1881,34 @@ def render_subpage(key, page):
 </html>'''
     return body
 
+def render_404():
+    """Pagina 404 con diseño coherente con el resto del sitio."""
+    head = head_html(
+        title='Pagina no encontrada · ASEM',
+        description='La pagina que buscas no existe. Revisa nuestro catalogo de mobiliario para eventos en Bogota.',
+        canonical='',
+        depth=0,
+    )
+    return f'''{head}
+{navbar_html(0)}
+
+<section class="hero-inner" style="min-height: 70vh; display: flex; align-items: center; justify-content: center;">
+  <div style="text-align: center; position: relative; z-index: 2;">
+    <div style="font-family: var(--font-display); font-weight: 200; font-size: clamp(80px, 14vw, 160px); letter-spacing: 6px; line-height: 1; color: var(--turquesa); margin-bottom: 8px;">404</div>
+    <h1 style="font-family: var(--font-display); font-weight: 300; font-size: clamp(28px, 4vw, 44px); letter-spacing: 3px; color: var(--blanco); margin-bottom: 16px;">P&aacute;gina no encontrada</h1>
+    <p style="font-family: var(--font-body); font-size: 16px; color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 32px;">La direcci&oacute;n que buscas no existe o fue movida. Vuelve al inicio o cot&iacute;zanos directo por WhatsApp.</p>
+    <div class="hero-ctas" style="justify-content: center;">
+      <a class="btn btn-outline-light" href="/">Volver al inicio</a>
+      <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+{footer_html(0)}
+<script src="{asset('assets/js/main.js', 0)}?v={ASSET_VERSION}"></script>
+</body>
+</html>'''
+
 def render_acarreos(key, page):
     """Pagina especial 17 — sin H1, layout distinto."""
     slug = page['slug']
@@ -2267,7 +2301,9 @@ def main():
             print(f'  {page["slug"]}/index.html  <- {key}')
     write_sitemap()
     write_robots()
-    print('Sitemap + robots.txt OK')
+    # 404 page
+    write_page(ROOT / '404.html', render_404())
+    print('Sitemap + robots.txt + 404.html OK')
 
 if __name__ == '__main__':
     main()

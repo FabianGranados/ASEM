@@ -1,0 +1,17 @@
+{
+  "name": "ASEM Alquiler de Salas y Mobiliario",
+  "short_name": "ASEM",
+  "description": "Alquiler de mobiliario premium para eventos en Bogotá. Más de 10 años, 500+ eventos al año, 4.7★ en Google.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0D2A32",
+  "theme_color": "#0D2A32",
+  "orientation": "portrait-primary",
+  "lang": "es-CO",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}
