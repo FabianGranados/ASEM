@@ -30,6 +30,203 @@ SITE = 'https://alquilersalasparaeventosymobiliario.com'
 WA_PHONE = '573013228490'
 WA_LINK = f'https://wa.me/{WA_PHONE}?text=Hola,%20quiero%20cotizar%20mobiliario'
 
+# ============================================================
+# Reseñas reales (Google Maps) — base de datos para schema y testimonios
+# ============================================================
+REVIEWS = [
+    {
+        'author': 'Stefania García',
+        'date': '2025-05-15',
+        'rating': 5,
+        'text': 'Totalmente recomendado por las siguientes razones: respuesta inmediata a través de WhatsApp, variedad de mobiliario y excelente comunicación para coordinar la entrega. Las personas que entregaron el mobiliario fueron muy puntuales y dejaron todo perfectamente armado.',
+        'short': 'Respuesta inmediata por WhatsApp, variedad de mobiliario y excelente comunicación. El equipo de entrega fue puntual y dejó todo perfectamente armado.',
+    },
+    {
+        'author': 'María Andrea Bohórquez',
+        'date': '2025-09-20',
+        'rating': 5,
+        'text': 'El servicio fue excelente, me atendieron amablemente, me apoyaron en todo el proceso de alquiler del mobiliario. Las personas que vinieron a entregarme las salas y los calentadores me ayudaron no solo a organizarlos sino que también me asesoraron.',
+        'short': 'El servicio fue excelente, me apoyaron en todo el proceso. Las personas que entregaron las salas y los calentadores me ayudaron a organizarlos y me asesoraron.',
+    },
+    {
+        'author': 'Jhon Alexander Herrera',
+        'date': '2025-07-22',
+        'rating': 5,
+        'text': 'Súper recomendados, excelente servicio. La atención de Laura la comercial estupenda. Es muy cordial y efectiva. El evento salió de maravilla. Muchas gracias.',
+        'short': 'Súper recomendados, excelente servicio. La atención de Laura la comercial es muy cordial y efectiva. El evento salió de maravilla.',
+    },
+    {
+        'author': 'Leonardo Romero',
+        'date': '2025-12-15',
+        'rating': 5,
+        'text': 'Todo excelente. El personal de entrega del mobiliario muy amable y decente.',
+        'short': 'Todo excelente. El personal de entrega del mobiliario muy amable y decente.',
+    },
+    {
+        'author': 'AnFerTM Studios',
+        'date': '2025-11-18',
+        'rating': 5,
+        'text': 'Buen servicio en general, entrega y recogida del mobiliario de manera oportuna e idónea atención al cliente. Recomendado.',
+        'short': 'Buen servicio en general, entrega y recogida oportuna. Idónea atención al cliente. Recomendado.',
+    },
+]
+
+# ============================================================
+# FAQ — preguntas comunes optimizadas para AI search (ChatGPT, Perplexity, AIO)
+# ============================================================
+FAQS = [
+    {
+        'q': '¿Cuánto cuesta alquilar mobiliario para un evento en Bogotá?',
+        'a': 'El precio depende del tipo y cantidad de mobiliario, la fecha y la ubicación. En ASEM cotizamos cada evento de forma personalizada y respondemos por WhatsApp en minutos con propuesta clara y precio cerrado. Escríbenos al 301 322 8490 con los detalles de tu evento para recibir una cotización sin compromiso.',
+    },
+    {
+        'q': '¿Incluyen montaje, desmontaje y transporte?',
+        'a': 'Sí. Nuestro servicio incluye entrega, montaje completo, desmontaje y recogida después del evento. Coordinamos los horarios contigo para que solo te encargues de disfrutar. El transporte está incluido dentro de Bogotá y se cotiza por separado para municipios aledaños.',
+    },
+    {
+        'q': '¿Atienden eventos fuera de Bogotá?',
+        'a': 'Sí, cubrimos Bogotá y sus alrededores (Chía, Cota, Cajicá, La Calera, Sopó, Tabio y municipios cercanos). Para eventos en otras zonas, consulta disponibilidad por WhatsApp y coordinamos transporte y montaje a la medida de tu evento.',
+    },
+    {
+        'q': '¿Qué tipos de eventos cubren?',
+        'a': 'Atendemos bodas, cocteles, lanzamientos de marca, ferias, eventos corporativos, fiestas privadas, activaciones, celebraciones al aire libre, eventos sociales y empresariales. Con más de 10 años de experiencia y más de 500 eventos al año en Bogotá.',
+    },
+    {
+        'q': '¿Con cuánta anticipación debo reservar?',
+        'a': 'Recomendamos reservar con al menos 2-3 semanas de anticipación, especialmente para fechas de alta demanda (diciembre, mayo, agosto). Para eventos urgentes consulta disponibilidad por WhatsApp; muchas veces logramos atender pedidos de última hora si tenemos el mobiliario disponible.',
+    },
+    {
+        'q': '¿Cómo solicito una cotización?',
+        'a': 'Escríbenos por WhatsApp a Laura al 301 322 8490 o Paola al 301 600 3031, indicando: fecha del evento, ubicación, número de invitados y tipo de mobiliario que necesitas. Respondemos en minutos con una propuesta clara y precio cerrado, sin compromiso.',
+    },
+]
+
+def schema_jsonld_home():
+    """Schema.org JSON-LD para LocalBusiness + AggregateRating + Reviews + FAQPage.
+    Critico para LLMs (ChatGPT, Perplexity, Google AI Overviews, Bing Copilot)."""
+    import json as _json
+    business = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'LocalBusiness',
+                '@id': f'{SITE}/#business',
+                'name': 'ASEM Alquiler de Salas y Mobiliario',
+                'alternateName': 'ASEM',
+                'description': 'Alquiler de mobiliario premium para eventos en Bogotá: salas lounge, mesas, sillas, mobiliario industrial, rústico, LED, Acapulco, picnic, calefactores, pista de baile LED y accesorios.',
+                'url': SITE + '/',
+                'logo': f'{SITE}/assets/img/ASEM-mobiliario-para-eventos-en-bogota.png',
+                'image': f'{SITE}/assets/img/hero-1-salas-lounge.webp',
+                'foundingDate': '2014',
+                'priceRange': '$$',
+                'areaServed': [
+                    {'@type': 'City', 'name': 'Bogotá'},
+                    {'@type': 'AdministrativeArea', 'name': 'Cundinamarca, Colombia'},
+                ],
+                'address': {
+                    '@type': 'PostalAddress',
+                    'addressLocality': 'Bogotá',
+                    'addressRegion': 'Cundinamarca',
+                    'addressCountry': 'CO',
+                },
+                'telephone': '+57-301-322-8490',
+                'contactPoint': [
+                    {'@type': 'ContactPoint', 'telephone': '+57-301-322-8490', 'contactType': 'sales', 'name': 'Laura Martínez', 'areaServed': 'CO', 'availableLanguage': 'Spanish'},
+                    {'@type': 'ContactPoint', 'telephone': '+57-301-600-3031', 'contactType': 'sales', 'name': 'Paola Castro', 'areaServed': 'CO', 'availableLanguage': 'Spanish'},
+                ],
+                'sameAs': [
+                    'https://instagram.com/alquilersalasparaeventos',
+                ],
+                'aggregateRating': {
+                    '@type': 'AggregateRating',
+                    'ratingValue': '4.7',
+                    'reviewCount': '90',
+                    'bestRating': '5',
+                    'worstRating': '1',
+                },
+                'review': [
+                    {
+                        '@type': 'Review',
+                        'author': {'@type': 'Person', 'name': r['author']},
+                        'datePublished': r['date'],
+                        'reviewRating': {'@type': 'Rating', 'ratingValue': str(r['rating']), 'bestRating': '5'},
+                        'reviewBody': r['text'],
+                    }
+                    for r in REVIEWS
+                ],
+                'makesOffer': [
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de salas lounge para eventos', 'url': f'{SITE}/salas-lounge-para-eventos-en-bogota/'}},
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de mobiliario LED para eventos', 'url': f'{SITE}/mobiliario-led-eventos-bogota/'}},
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de sillas Acapulco para eventos', 'url': f'{SITE}/sillas-acapulco-para-eventos-bogota/'}},
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de mesas picnic para eventos', 'url': f'{SITE}/mesas-picnic-para-eventos-bogota/'}},
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de mobiliario industrial para eventos', 'url': f'{SITE}/mesas-sillas-industriales-eventos-bogota/'}},
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de salas rústicas para eventos', 'url': f'{SITE}/salas-rusticas-para-eventos-bogota/'}},
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de calefactores para eventos', 'url': f'{SITE}/calefactores-ambiente-para-eventos/'}},
+                    {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': 'Alquiler de pista de baile LED', 'url': f'{SITE}/pista-de-baile-para-eventos/'}},
+                ],
+                'slogan': 'Ambienta, impacta y celebra',
+            },
+            {
+                '@type': 'FAQPage',
+                '@id': f'{SITE}/#faq',
+                'mainEntity': [
+                    {
+                        '@type': 'Question',
+                        'name': f['q'],
+                        'acceptedAnswer': {'@type': 'Answer', 'text': f['a']},
+                    }
+                    for f in FAQS
+                ],
+            },
+            {
+                '@type': 'WebSite',
+                '@id': f'{SITE}/#website',
+                'url': SITE + '/',
+                'name': 'ASEM Alquiler de Salas y Mobiliario',
+                'description': 'Alquiler de mobiliario premium para eventos en Bogotá. Más de 10 años, 500+ eventos al año, 4.7★ en Google con 90 reseñas.',
+                'publisher': {'@id': f'{SITE}/#business'},
+                'inLanguage': 'es-CO',
+            },
+        ],
+    }
+    return '<script type="application/ld+json">' + _json.dumps(business, ensure_ascii=False, indent=2) + '</script>'
+
+def schema_jsonld_subpage(page):
+    """Schema.org JSON-LD para cada subpagina: Service + breadcrumbs."""
+    import json as _json
+    slug = page.get('slug', '')
+    title = page.get('Meta Title', '')
+    desc = page.get('Meta Description', '')
+    h1 = page.get('H1', '')
+    if h1.startswith('(No'):
+        h1 = title
+    images = page.get('images', [])
+    image_url = f'{SITE}/assets/img/{images[0]["file"]}' if images else f'{SITE}/assets/img/hero-1-salas-lounge.webp'
+    graph = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'Service',
+                '@id': f'{SITE}/{slug}/#service',
+                'name': h1,
+                'description': desc,
+                'serviceType': 'Alquiler de mobiliario para eventos',
+                'provider': {'@id': f'{SITE}/#business'},
+                'areaServed': {'@type': 'City', 'name': 'Bogotá'},
+                'url': f'{SITE}/{slug}/',
+                'image': image_url,
+            },
+            {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {'@type': 'ListItem', 'position': 1, 'name': 'Inicio', 'item': SITE + '/'},
+                    {'@type': 'ListItem', 'position': 2, 'name': h1, 'item': f'{SITE}/{slug}/'},
+                ],
+            },
+        ],
+    }
+    return '<script type="application/ld+json">' + _json.dumps(graph, ensure_ascii=False, indent=2) + '</script>'
+
 # Map "MOBILIARIO X" labels (uppercase, may include tilde) to slug + display name + intro text
 ESTILOS = {
     'MOBILIARIO LOUNGE':     ('salas-lounge-para-eventos-en-bogota',     'Lounge',     'Salas comodas en cuero y velvet para conversacion intima.'),
@@ -316,14 +513,14 @@ def footer_html(depth):
   </div>
 </a>'''
 
-def head_html(title, description, canonical, depth, og_image_filename=None):
+def head_html(title, description, canonical, depth, og_image_filename=None, jsonld=''):
     css_path = asset('assets/css/styles.css', depth) + f'?v={ASSET_VERSION}'
     og_url = f'{SITE}/{canonical}/' if canonical else f'{SITE}/'
     og_img = ''
     if og_image_filename:
         og_img = f'<meta property="og:image" content="{SITE}/assets/img/{escape(og_image_filename)}">'
     return f'''<!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -331,12 +528,21 @@ def head_html(title, description, canonical, depth, og_image_filename=None):
 <meta name="description" content="{escape(description)}">
 <link rel="canonical" href="{og_url}">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ASEM">
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(description)}">
 <meta property="og:url" content="{og_url}">
 {og_img}
-<meta name="robots" content="index,follow">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{escape(title)}">
+<meta name="twitter:description" content="{escape(description)}">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="ASEM Alquiler de Salas y Mobiliario">
+<meta name="geo.region" content="CO-CUN">
+<meta name="geo.placename" content="Bogotá">
 <link rel="stylesheet" href="{css_path}">
+{jsonld}
 </head>
 <body>'''
 
@@ -348,6 +554,79 @@ def cta_block(h2, h3, dorado=False):
   <a class="btn-large btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
+</section>'''
+
+def testimonios_block():
+    """Seccion de testimonios con resenas reales de Google (refuerza schema AggregateRating).
+    Visible para usuarios (prueba social) + signal LLM/AI Overviews."""
+    # Toma las primeras 4 (Stefania, Maria Andrea, Jhon Alexander, Leonardo)
+    items = []
+    for r in REVIEWS[:4]:
+        # initial letter for avatar
+        initial = r['author'][0].upper()
+        stars = '★' * int(r['rating'])
+        date_label = {
+            '2025-05-15': 'Hace un año',
+            '2025-09-20': 'Hace 8 meses',
+            '2025-07-22': 'Hace 10 meses',
+            '2025-12-15': 'Hace 5 meses',
+            '2025-11-18': 'Hace 6 meses',
+        }.get(r['date'], '')
+        items.append(f'''      <article class="testimonio reveal">
+        <div class="testimonio-head">
+          <div class="testimonio-avatar" aria-hidden="true">{escape(initial)}</div>
+          <div class="testimonio-meta">
+            <div class="testimonio-name">{escape(r['author'])}</div>
+            <div class="testimonio-date">
+              <span class="testimonio-stars" aria-label="{r['rating']} de 5 estrellas">{stars}</span>
+              <span>&middot; {escape(date_label)}</span>
+            </div>
+          </div>
+        </div>
+        <blockquote class="testimonio-text">{escape(r['short'])}</blockquote>
+      </article>''')
+    cards_html = '\n'.join(items)
+    return f'''<section class="testimonios-section" id="testimonios" aria-labelledby="testimonios-title">
+  <div class="testimonios-inner">
+    <div class="testimonios-head reveal">
+      <span class="label">Rese&ntilde;as</span>
+      <h2 id="testimonios-title">Lo que dicen quienes nos eligen</h2>
+      <a class="testimonios-rating" href="https://www.google.com/search?q=ASEM+alquiler+salas+y+mobiliario+bogota" target="_blank" rel="noopener">
+        <span class="testimonios-rating-num">4.7</span>
+        <span class="testimonios-rating-stars" aria-hidden="true">★★★★★</span>
+        <span class="testimonios-rating-meta">en Google &middot; 90 rese&ntilde;as verificadas</span>
+      </a>
+    </div>
+    <div class="testimonios-grid">
+{cards_html}
+    </div>
+  </div>
+</section>'''
+
+def faq_block():
+    """Seccion FAQ con FAQPage schema. Cada Q usa <details> nativo (accordion).
+    Optimizado para Google AI Overviews y consultas conversacionales."""
+    items = []
+    for f in FAQS:
+        items.append(f'''      <details class="faq-item reveal">
+        <summary>
+          <span class="faq-q">{escape(f['q'])}</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">{escape(f['a'])}</div>
+      </details>''')
+    items_html = '\n'.join(items)
+    return f'''<section class="faq-section" id="faq" aria-labelledby="faq-title">
+  <div class="faq-inner">
+    <div class="faq-head reveal">
+      <span class="label">Preguntas frecuentes</span>
+      <h2 id="faq-title">Lo que m&aacute;s nos preguntan</h2>
+      <p class="faq-sub">Todo lo que necesitas saber antes de cotizar tu evento. &iquest;Algo m&aacute;s? Escr&iacute;benos por WhatsApp.</p>
+    </div>
+    <div class="faq-list">
+{items_html}
+    </div>
+  </div>
 </section>'''
 
 def cta_final_block():
@@ -436,7 +715,8 @@ def render_subpage(key, page):
     h3_mobiliario_extra = next((h for h in h3s if h.upper().startswith('MOBILIARIO')), None)
 
     head = head_html(title, desc, slug, depth,
-                     og_image_filename=images[0]['file'] if images else None)
+                     og_image_filename=images[0]['file'] if images else None,
+                     jsonld=schema_jsonld_subpage(page))
     nav = navbar_html(depth)
 
     # Hero interior
@@ -581,7 +861,8 @@ def render_acarreos(key, page):
     desc = page.get('Meta Description')
     images = page.get('images', [])
     head = head_html(title, desc, slug, depth,
-                     og_image_filename=images[0]['file'] if images else None)
+                     og_image_filename=images[0]['file'] if images else None,
+                     jsonld=schema_jsonld_subpage(page))
     nav = navbar_html(depth)
 
     figs = '\n'.join(
@@ -666,7 +947,8 @@ def render_home(key, page):
     h3_siguenos = next((h for h in h3s if 'siguenos' in h.lower() or 'síguenos' in h.lower()), 'SÍGUENOS EN')
 
     head = head_html(title, desc, '', depth,
-                     og_image_filename='alquiler-de-mobiliario-para-eventos-en-bogota.webp')
+                     og_image_filename='alquiler-de-mobiliario-para-eventos-en-bogota.webp',
+                     jsonld=schema_jsonld_home())
     nav = navbar_html(depth)
 
     # Cat cards for the 6 estilos
@@ -762,6 +1044,10 @@ def render_home(key, page):
       <a href="#catalogo" class="btn btn-outline-light">Ver cat&aacute;logo</a>
       <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
     </div>
+    <a href="#testimonios" class="hero-rating anim anim-4" aria-label="Ver reseñas">
+      <span class="hero-rating-stars" aria-hidden="true">★★★★★</span>
+      <span class="hero-rating-text"><strong>4.7</strong> en Google <span class="dot">&middot;</span> 90 rese&ntilde;as</span>
+    </a>
   </div>
   <div class="hero-dots" role="tablist" aria-label="Cambiar imagen del hero">
     <button type="button" class="is-active" aria-label="Salas Lounge"></button>
@@ -870,6 +1156,10 @@ def render_home(key, page):
     </div>
   </div>
 </section>
+
+{testimonios_block()}
+
+{faq_block()}
 
 {cta_final_block()}
 {footer_html(depth)}
