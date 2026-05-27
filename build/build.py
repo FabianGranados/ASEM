@@ -22,6 +22,10 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 DATA = json.loads((ROOT / 'build' / 'pages.json').read_text(encoding='utf-8'))
 
+# Cache-buster: cambia cada build para forzar al navegador a recargar CSS/JS
+import time
+ASSET_VERSION = str(int(time.time()))
+
 SITE = 'https://alquilersalasparaeventosymobiliario.com'
 WA_PHONE = '573013228490'
 WA_LINK = f'https://wa.me/{WA_PHONE}?text=Hola,%20quiero%20cotizar%20mobiliario'
@@ -304,7 +308,7 @@ def footer_html(depth):
 </a>'''
 
 def head_html(title, description, canonical, depth, og_image_filename=None):
-    css_path = asset('assets/css/styles.css', depth)
+    css_path = asset('assets/css/styles.css', depth) + f'?v={ASSET_VERSION}'
     og_url = f'{SITE}/{canonical}/' if canonical else f'{SITE}/'
     og_img = ''
     if og_image_filename:
@@ -554,7 +558,7 @@ def render_subpage(key, page):
 {referencias_html}
 {cta_final_block()}
 {footer_html(depth)}
-<script src="{asset('assets/js/main.js', depth)}"></script>
+<script src="{asset('assets/js/main.js', depth)}?v={ASSET_VERSION}"></script>
 </body>
 </html>'''
     return body
@@ -620,7 +624,7 @@ def render_acarreos(key, page):
 
 {cta_final_block()}
 {footer_html(depth)}
-<script src="{asset('assets/js/main.js', depth)}"></script>
+<script src="{asset('assets/js/main.js', depth)}?v={ASSET_VERSION}"></script>
 </body>
 </html>'''
     return body
@@ -858,7 +862,7 @@ def render_home(key, page):
 
 {cta_final_block()}
 {footer_html(depth)}
-<script src="{asset('assets/js/main.js', depth)}"></script>
+<script src="{asset('assets/js/main.js', depth)}?v={ASSET_VERSION}"></script>
 </body>
 </html>'''
     return body
