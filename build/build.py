@@ -224,7 +224,6 @@ def navbar_html(depth):
 {accesorios}
       </div>
     </div>
-    <div class="nav-item"><a href="{link_to('acarreos-trasteos-y-mudanzas-bogota', depth)}">Acarreos y Mudanzas</a></div>
   </div>
 
   <a class="btn-cotizar btn-wa desktop-only" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar ahora</a>
@@ -251,7 +250,6 @@ def navbar_html(depth):
 {overlay_accesorios}
     </ul>
   </details>
-  <a href="{link_to('acarreos-trasteos-y-mudanzas-bogota', depth)}">Acarreos, Trasteos y Mudanzas</a>
   <a class="btn-cotizar btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar ahora</a>
 </div>'''
 
@@ -353,12 +351,13 @@ def cta_block(h2, h3, dorado=False):
 </section>'''
 
 def cta_final_block():
-    """Bloque final con headline visual sin usar h1/h2/h3 para no inflar las cuentas SEO del Excel."""
+    """Bloque final con headline visual sin usar h1/h2/h3 para no inflar las cuentas SEO del Excel.
+    Boton mantiene el color dorado de la marca (no se aplica .btn-wa por decision del cliente)."""
     return f'''<section class="cta-final" id="contacto">
   <span class="label reveal">Cuentanos</span>
   <div class="cta-final-headline reveal" role="heading" aria-level="2">Tienes un evento<br>en mente?</div>
   <p class="cta-final-sub reveal">Cuentanos y creamos el ambiente perfecto.</p>
-  <a class="btn-large btn-wa reveal" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
+  <a class="btn-large reveal" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
   <div class="cta-phones reveal">301 322 8490 &middot; 301 600 3031</div>
