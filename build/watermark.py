@@ -36,6 +36,7 @@ SKIP_PATTERNS = [
     'hero-4-parasoles',
     'hero-led-banner',          # banner Mobiliario LED
     'hero-industrial-banner',   # banner Mobiliario Industrial
+    'hero-acapulco-banner',     # banner Mobiliario Acapulco
     'evento-mockup',  # mockups reservados
 ]
 

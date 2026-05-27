@@ -1122,6 +1122,7 @@ SUBPAGE_CUSTOM = {
     },
     '12_MOB_ACAPULCO': {
         'hero_subtitle': 'Sillas Acapulco multicolor y unicolor para eventos frescos, fiestas tropicales y celebraciones al aire libre en Bogot&aacute;. El cl&aacute;sico mexicano con personalidad para tu evento.',
+        'hero_banner': 'hero-acapulco-banner.webp',
         'hero_specs': [
             ('M5 8h14v9H5z M7 17v3 M17 17v3', 'Sillas Acapulco ic&oacute;nicas'),
             ('M12 2v4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M2 12h4 M18 12h4', 'Multicolor o unicolor'),
