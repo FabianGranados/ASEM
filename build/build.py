@@ -1251,6 +1251,7 @@ SUBPAGE_CUSTOM = {
     },
     '13_CALEFACTORES': {
         'hero_subtitle': 'Calefactores de ambiente pir&aacute;mide y hongo para eventos al aire libre en Bogot&aacute;. Mantienen el calor en terrazas, jardines y carpas cuando baja la temperatura.',
+        'hero_banner': 'hero-calefactores-banner.webp',
         'hero_specs': [
             ('M12 2c1.5 2 1.5 4 0 6s-1.5 4 0 6 M8 4c1 1.5 1 3 0 4.5s-1 3 0 4.5 M16 4c1 1.5 1 3 0 4.5s-1 3 0 4.5 M5 14h14v7H5z', 'Hongo y pir&aacute;mide'),
             ('M3 7h4 M21 7h-4 M3 12h4 M21 12h-4 M3 17h4 M21 17h-4 M12 4v16', 'Calienta hasta 25 m&sup2;'),
@@ -2304,6 +2305,7 @@ def write_image_sitemap():
         ('hero-led-banner.webp', 'Mobiliario LED para eventos nocturnos en Bogota - ASEM'),
         ('hero-industrial-banner.webp', 'Mobiliario industrial para eventos corporativos - ASEM'),
         ('hero-acapulco-banner.webp', 'Sillas Acapulco multicolor en jardin - ASEM'),
+        ('hero-calefactores-banner.webp', 'Calefactores piramide para eventos al aire libre en Bogota - ASEM'),
     ]
     for key, p in DATA.items():
         if key.startswith('00_'):
