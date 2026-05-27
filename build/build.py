@@ -2280,9 +2280,57 @@ def write_sitemap():
     xml.append('</urlset>')
     (ROOT / 'sitemap.xml').write_text('\n'.join(xml), encoding='utf-8')
 
+def write_image_sitemap():
+    """Sitemap separado de imagenes — ayuda a Google Image Search a descubrir
+    rapido las URLs de las nuevas fotos cuando hagamos el swap del dominio.
+    Cada pagina lista sus imagenes con caption + title."""
+    from html import escape as xml_escape
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+           '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
+    # Logo path / banner files that are not in Excel but exist
+    extra_imgs_global = [
+        ('hero-1-salas-lounge.webp', 'Salas lounge para eventos en Bogota - ASEM'),
+        ('hero-2-mobiliario-rustico.webp', 'Mobiliario rustico para eventos al aire libre - ASEM'),
+        ('hero-3-sillas-acapulco.webp', 'Sillas Acapulco multicolor para eventos - ASEM'),
+        ('hero-4-parasoles.webp', 'Parasoles y eventos al aire libre en Bogota - ASEM'),
+        ('hero-led-banner.webp', 'Mobiliario LED para eventos nocturnos en Bogota - ASEM'),
+        ('hero-industrial-banner.webp', 'Mobiliario industrial para eventos corporativos - ASEM'),
+        ('hero-acapulco-banner.webp', 'Sillas Acapulco multicolor en jardin - ASEM'),
+    ]
+    for key, p in DATA.items():
+        if key.startswith('00_'):
+            continue
+        slug = p['slug']
+        url = f'{SITE}/{slug}/' if slug else f'{SITE}/'
+        xml.append(f'  <url>')
+        xml.append(f'    <loc>{url}</loc>')
+        # Imagenes especificas de la pagina segun Excel
+        for img in p.get('images', []):
+            img_url = f'{SITE}/assets/img/{img["file"]}'
+            alt = xml_escape(img.get('alt', '') or img['file'].replace('-', ' ').rsplit('.', 1)[0])
+            title = xml_escape(p.get('H1', '') or 'ASEM - Alquiler de mobiliario para eventos en Bogota')
+            xml.append(f'    <image:image>')
+            xml.append(f'      <image:loc>{img_url}</image:loc>')
+            xml.append(f'      <image:caption>{alt}</image:caption>')
+            xml.append(f'      <image:title>{title}</image:title>')
+            xml.append(f'    </image:image>')
+        # En la home tambien incluimos los hero banners y assets globales
+        if not slug:
+            for fn, caption in extra_imgs_global:
+                img_url = f'{SITE}/assets/img/{fn}'
+                xml.append(f'    <image:image>')
+                xml.append(f'      <image:loc>{img_url}</image:loc>')
+                xml.append(f'      <image:caption>{xml_escape(caption)}</image:caption>')
+                xml.append(f'      <image:title>ASEM Alquiler de Salas y Mobiliario</image:title>')
+                xml.append(f'    </image:image>')
+        xml.append(f'  </url>')
+    xml.append('</urlset>')
+    (ROOT / 'image-sitemap.xml').write_text('\n'.join(xml), encoding='utf-8')
+
 def write_robots():
     (ROOT / 'robots.txt').write_text(
-        f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n',
+        f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\nSitemap: {SITE}/image-sitemap.xml\n',
         encoding='utf-8'
     )
 
@@ -2306,6 +2354,7 @@ def main():
             write_page(ROOT / page['slug'] / 'index.html', html)
             print(f'  {page["slug"]}/index.html  <- {key}')
     write_sitemap()
+    write_image_sitemap()
     write_robots()
     # Version file para auto-detection de actualizaciones (cache busting)
     (ROOT / 'version.txt').write_text(ASSET_VERSION + '\n')
