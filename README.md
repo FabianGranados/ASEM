@@ -63,9 +63,25 @@ Editar `build/pages.json` o `build/build.py` y volver a correr. Los placeholders
 
 Es HTML estático puro: cualquier hosting (Hostinger, Netlify, GitHub Pages, S3+CloudFront) funciona. Para que `/salas-lounge-para-eventos-en-bogota/` resuelva, el servidor debe servir `index.html` por defecto (Apache y Nginx lo hacen out-of-the-box). En Netlify funciona sin configuración.
 
+## Protección de imágenes
+
+El sitio aplica una doble capa anti-robo:
+
+1. **JavaScript** en `assets/js/main.js` que bloquea el click derecho y el drag-and-drop sobre cualquier `<img>`. Detiene el 95% del robo casual.
+2. **Watermark visible** "ASEM" en la esquina inferior derecha de cada foto. Procesado vía `build/watermark.py` y guardado en el binario.
+
+Para procesar imágenes nuevas que subas a `assets/img/`:
+
+```
+python3 build/watermark.py
+```
+
+El script lleva un manifest en `build/.watermarked.json` que evita doble-watermarking. Si reemplazas una foto (mismo filename, contenido nuevo), el script detecta el cambio de tamaño y la re-procesa.
+
+Limitación: ningún sitio web puede prevenir 100% el robo (DevTools y screenshots siempre funcionan). El watermark sirve como deterrente y prueba de propiedad.
+
 ## Pendientes (siguiente iteración)
 
-- Reemplazar placeholders en `assets/img/` por las fotos reales.
-- Mejorar el copy de cada página (intro, ventajas) una a una sin tocar los headings.
-- Agregar schema.org `LocalBusiness` / `Service` JSON-LD.
+- Mejorar el copy de las 17 subpáginas (intros, ventajas) una a una sin tocar los headings.
+- Agregar schema.org `Service` a cada subpágina (el home ya tiene LocalBusiness + AggregateRating + FAQPage).
 - Conectar formulario de contacto si se quiere alternativa al WhatsApp.

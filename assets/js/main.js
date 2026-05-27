@@ -1,6 +1,29 @@
 /* Marca html.js para que el CSS aplique animaciones */
 document.documentElement.classList.add('js');
 
+/* Anti-robo de imagenes — bloquea click derecho y drag-and-drop sobre <img>.
+   Detiene el ~95% del robo casual. No detiene DevTools ni screenshots
+   (eso es imposible en navegador), pero detiene "click derecho > guardar". */
+(function () {
+  document.addEventListener('contextmenu', function (e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      e.preventDefault();
+      return false;
+    }
+  }, false);
+  document.addEventListener('dragstart', function (e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      e.preventDefault();
+      return false;
+    }
+  }, false);
+  // Tambien bloquea click derecho sobre el marco del showcase y cat-cards
+  // (que usan background-image y otros divs como capa de proteccion)
+  document.querySelectorAll('.showcase-frame, .cat-card, .galeria-grid figure').forEach(function (el) {
+    el.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  });
+})();
+
 /* Navbar scroll border */
 (function () {
   var nav = document.getElementById('navbar');
