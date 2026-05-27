@@ -1,0 +1,299 @@
+LISTADO DE FOTOS PENDIENTES POR SUBIR
+======================================================================
+TOTAL: 128 fotos pendientes
+
+
+Como subir cada foto:
+  1. Renombra tu foto al EXACTO filename que aparece abajo
+  2. Convierte a WebP (calidad 80) o JPG (calidad 85)
+  3. Sube a /assets/img/ via GitHub web o git push
+  4. El build NO la pisara mas (proteccion activa)
+
+Tamano recomendado: 1200x900 px maximo, < 200KB
+
+--- SILLAS-ACAPULCO-PARA-EVENTOS-BOGOTA (5 fotos) ---
+  [ ] sillas-acapulco-en-alquiler-bogota-2.webp
+        Alt text (concepto de la foto): sillas acapulco en alquiler bogota
+  [ ] alquiler-de-sillas-acapulco-para-fiestas.webp
+        Alt text (concepto de la foto): alquiler de sillas acapulco para fiestas
+  [ ] alquiler-de-silla-acapulco-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de silla acapulco para eventos
+  [ ] sillas-acapulco-en-alquiler-bogota.webp
+        Alt text (concepto de la foto): sillas acapulco en alquiler bogota
+  [ ] alquiler-de-sillas-acapulco-en-chia.webp
+        Alt text (concepto de la foto): alquiler de sillas acapulco en chia
+
+--- SALAS-LOUNGE-PARA-EVENTOS-EN-BOGOTA (12 fotos) ---
+  [ ] salas-blancas-para-eventos-bogota.webp
+        Alt text (concepto de la foto): salas blancas para eventos bogota
+  [ ] alquiler-de-salas-tipo-loft-y-lounge-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de salas tipo loft y lounge para eventos
+  [ ] alquiler-salas-para-eventos-sociales-y-empresariales.webp
+        Alt text (concepto de la foto): alquiler salas para eventos sociales y empresariales
+  [ ] renta-de-salas-para-eventos.webp
+        Alt text (concepto de la foto): renta de salas para eventos
+  [ ] salas-grises-para-eventos.webp
+        Alt text (concepto de la foto): salas grises para eventos
+  [ ] alquiler-de-salas-lounge-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de salas lounge en bogota
+  [ ] Alquiler-de-mobiliario-para-eventos-ASEM.webp
+        Alt text (concepto de la foto): Alquiler de mobiliario para eventos ASEM
+  [ ] alquiler-de-salas-grises-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de salas grises para eventos
+  [ ] alquiler-de-salas-lounge-bogota.webp
+        Alt text (concepto de la foto): alquiler de salas lounge bogota
+  [ ] salas-para-eventos-bogota-ASEM.webp
+        Alt text (concepto de la foto): salas para eventos bogota ASEM
+  [ ] salas-y-eventos-decolounge.webp
+        Alt text (concepto de la foto): salas y eventos decolounge
+  [ ] alquiler-de-mobiliario-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de mobiliario para fiestas en bogota
+
+--- SALAS-RUSTICAS-PARA-EVENTOS-BOGOTA (11 fotos) ---
+  [ ] alquiler-de-salas-rusticas-bogota.webp
+        Alt text (concepto de la foto): alquiler de salas rusticas bogota
+  [ ] calefactores-en-alquiler.webp
+        Alt text (concepto de la foto): calefactores en alquiler
+  [ ] salas-en-madera-para-eventos.webp
+        Alt text (concepto de la foto): salas en madera para eventos
+  [ ] alquiler-de-mobiliario-rustico-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de mobiliario rustico para eventos
+  [ ] sala-rustica-en-bogota.webp
+        Alt text (concepto de la foto): sala rustica en bogota
+  [ ] tu-sala-para-eventos.webp
+        Alt text (concepto de la foto): tu sala para eventos
+  [ ] alquiler-de-salas-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de salas para eventos
+  [ ] salas-en-madera-en-alquiler-bogota.webp
+        Alt text (concepto de la foto): salas en madera en alquiler bogota
+  [ ] salas-rusticas-para-eventos-bogota-en-alquiler.webp
+        Alt text (concepto de la foto): salas rusticas para eventos bogota en alquiler
+  [ ] salas-para-eventos-sociales.webp
+        Alt text (concepto de la foto): salas para eventos sociales
+  [ ] alquiler-de-salas-para-eventos-rusticos.webp
+        Alt text (concepto de la foto): alquiler de salas para eventos rusticos
+
+--- MESAS-PARA-EVENTOS-BOGOTA (11 fotos) ---
+  [ ] alquiler-de-mesas-de-coctel-para-eventos-1.webp
+        Alt text (concepto de la foto): alquiler de mesas de coctel para eventos
+  [ ] mesas-rectagulares-para-eventos.webp
+        Alt text (concepto de la foto): mesas rectagulares para eventos
+  [ ] mesas-cocteleras-en-bogota.webp
+        Alt text (concepto de la foto): mesas cocteleras en bogota
+  [ ] mesas-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): mesas para fiestas en bogota
+  [ ] alquiler-de-mesas-con-lycra-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de mesas con lycra en bogota
+  [ ] tablones-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): tablones para eventos en bogota
+  [ ] alquiler-de-mesas-bogota.webp
+        Alt text (concepto de la foto): alquiler de mesas bogota
+  [ ] alquiler-de-mesas-para-fiestas-1.webp
+        Alt text (concepto de la foto): alquiler de mesas para fiestas
+  [ ] mesas-en-alquiler.webp
+        Alt text (concepto de la foto): mesas en alquiler
+  [ ] alquiler-mesas-para-fiestas.webp
+        Alt text (concepto de la foto): alquiler mesas para fiestas
+  [ ] mesas-para-fiestas-en-bogota-1.webp
+        Alt text (concepto de la foto): mesas para fiestas en bogota
+
+--- SILLAS-PARA-EVENTOS-BOGOTA (10 fotos) ---
+  [ ] sillas-de-coctel-para-fiestas.webp
+        Alt text (concepto de la foto): sillas de coctel para fiestas
+  [ ] sillas-tiffany-para-eventos.webp
+        Alt text (concepto de la foto): sillas tiffany para eventos
+  [ ] renta-de-sillas-en-bogota.webp
+        Alt text (concepto de la foto): renta de sillas en bogota
+  [ ] sillas-de-coctel-para-eventos.webp
+        Alt text (concepto de la foto): sillas de coctel para eventos
+  [ ] alquiler-de-sillas-tiffany-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de sillas tiffany en bogota
+  [ ] sillas-wood-para-eventos.webp
+        Alt text (concepto de la foto): sillas wood para eventos
+  [ ] alquiler-de-sillas-para-fiestas.webp
+        Alt text (concepto de la foto): alquiler de sillas para fiestas
+  [ ] sillas-de-coctel-en-alquiler.webp
+        Alt text (concepto de la foto): sillas de coctel en alquiler
+  [ ] alquiler-de-sillas-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de sillas para eventos en bogota
+  [ ] alquiler-de-sillas-para-fiestas-en-bogota-asem.webp
+        Alt text (concepto de la foto): alquiler de sillas para fiestas en bogota asem
+
+--- SILLAS-PARA-JUNTAS-BOGOTA (9 fotos) ---
+  [ ] alquiler-de-mobiliario-acapulco-para-eventos-en-bogota-1.webp
+        Alt text (concepto de la foto): alquiler de mobiliario acapulco para eventos en bogota
+  [ ] sillas-para-conferencias-en-alquiler.webp
+        Alt text (concepto de la foto): sillas para conferencias en alquiler
+  [ ] sillas-en-alquiler.webp
+        Alt text (concepto de la foto): sillas en alquiler
+  [ ] sillas-acapulco-en-alquiler-bogota-1.webp
+        Alt text (concepto de la foto): sillas acapulco en alquiler bogota
+  [ ] sillas-acapulco-para-fiestas-en-bogota-1.webp
+        Alt text (concepto de la foto): sillas acapulco para fiestas en bogota
+  [ ] sillas-acapulco-para-eventos-sociales-en-bogota-1.webp
+        Alt text (concepto de la foto): sillas acapulco para eventos sociales en bogota
+  [ ] alquileres-en-bogota.webp
+        Alt text (concepto de la foto): alquileres en bogota
+  [ ] sillas-acapulco-para-fiestas-y-eventos-bogota-1.webp
+        Alt text (concepto de la foto): sillas acapulco para fiestas y eventos bogota
+  [ ] sillas-para-juntas-en-bogota.webp
+        Alt text (concepto de la foto): sillas para juntas en bogota
+
+--- POLTRONAS-PARA-EVENTOS-EN-BOGOTA (9 fotos) ---
+  [ ] poltrona-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): poltrona para fiestas en bogota
+  [ ] renta-de-poltronas-para-eventos.webp
+        Alt text (concepto de la foto): renta de poltronas para eventos
+  [ ] poltronas-negras-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): poltronas negras para eventos en bogota
+  [ ] poltronas-para-eventos-empresariales.webp
+        Alt text (concepto de la foto): poltronas para eventos empresariales
+  [ ] renta-de-poltronas-bogota.webp
+        Alt text (concepto de la foto): renta de poltronas bogota
+  [ ] alquiler-de-poltronas-en-bogota-asem.webp
+        Alt text (concepto de la foto): alquiler de poltronas en bogota asem
+  [ ] renta-de-poltronas-en-bogota.webp
+        Alt text (concepto de la foto): renta de poltronas en bogota
+  [ ] poltrona-blanca-en-alquiler.webp
+        Alt text (concepto de la foto): poltrona blanca en alquiler
+  [ ] alquiler-de-poltrona-para-eventos-empresariales.webp
+        Alt text (concepto de la foto): alquiler de poltrona para eventos empresariales
+
+--- COMEDORES-RUSTICOS-EVENTOS-BOGOTA (11 fotos) ---
+  [ ] alquiler-de-comedores-para-eventos-bogota.webp
+        Alt text (concepto de la foto): alquiler de comedores para eventos bogota
+  [ ] mesas-y-sillas-rusticas-eventos.webp
+        Alt text (concepto de la foto): mesas y sillas rusticas eventos
+  [ ] carretes-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): carretes para eventos en bogota
+  [ ] renta-de-mesas-en-madera-para-eventos.webp
+        Alt text (concepto de la foto): renta de mesas en madera para eventos
+  [ ] alquiler-de-mesas-en-madera-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de mesas en madera para eventos
+  [ ] mesas-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): mesas para eventos en bogota
+  [ ] alquiler-de-muebles-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de muebles para eventos en bogota
+  [ ] renta-de-comedores-para-eventos.webp
+        Alt text (concepto de la foto): renta de comedores para eventos
+  [ ] sillas-y-mesas-rusticas-en-alquiler.webp
+        Alt text (concepto de la foto): sillas y mesas rusticas en alquiler
+  [ ] carretes-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): carretes para fiestas en bogota
+  [ ] alquiler-de-parasoles-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de parasoles para eventos en bogota
+
+--- MOBILIARIO-LED-EVENTOS-BOGOTA (4 fotos) ---
+  [ ] mobiliario-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): mobiliario para eventos en bogota
+  [ ] mesas-iluminadas-en-bogota-.webp
+        Alt text (concepto de la foto): mesas iluminadas en bogota
+  [ ] alquiler-de-muebles-led-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de muebles led para eventos en bogota
+  [ ] alquiler-de-mesas-y-sillas-led.webp
+        Alt text (concepto de la foto): alquiler de mesas y sillas led
+
+--- MESAS-SILLAS-INDUSTRIALES-EVENTOS-BOGOTA (5 fotos) ---
+  [ ] alquiler-de-mobiliario-para-eventos-empresariales.webp
+        Alt text (concepto de la foto): alquiler de mobiliario para eventos empresariales
+  [ ] alquiler-de-mesas-de-coctel-bogota.webp
+        Alt text (concepto de la foto): alquiler de mesas de coctel bogota
+  [ ] alquiler-de-mesas-y-sillas-para-fiestas.webp
+        Alt text (concepto de la foto): alquiler de mesas y sillas para fiestas
+  [ ] alquiler-de-mesas-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de mesas en bogota
+  [ ] mesas-y-sillas-para-fiestas.webp
+        Alt text (concepto de la foto): mesas y sillas para fiestas
+
+--- MESAS-PICNIC-PARA-EVENTOS-BOGOTA (14 fotos) ---
+  [ ] mesas-picnic-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): mesas picnic para fiestas en bogota
+  [ ] mesa-de-picnic-con-cojines-en-alquiler.webp
+        Alt text (concepto de la foto): mesa de picnic con cojines en alquiler
+  [ ] alquiler-de-mesas-picnic-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de mesas picnic para eventos
+  [ ] mobiliario-picnic-para-bodas-al-aire-libre.webp
+        Alt text (concepto de la foto): mobiliario picnic para bodas al aire libre
+  [ ] alquiler-de-mesas-picnic-para-fiestas.webp
+        Alt text (concepto de la foto): alquiler de mesas picnic para fiestas
+  [ ] alquiler-de-mesas-con-cojines-picnic.webp
+        Alt text (concepto de la foto): alquiler de mesas con cojines picnic
+  [ ] alquiler-de-sillas-y-mesas-campestres.webp
+        Alt text (concepto de la foto): alquiler de sillas y mesas campestres
+  [ ] mesas-y-bancas-picnic-en-alquiler.webp
+        Alt text (concepto de la foto): mesas y bancas picnic en alquiler
+  [ ] mesas-picnic-en-alquiler.webp
+        Alt text (concepto de la foto): mesas picnic en alquiler
+  [ ] mesas-picnic-alquiler-salas-para-eventos-y-mobiliario.webp
+        Alt text (concepto de la foto): mesas picnic alquiler salas para eventos y mobiliario
+  [ ] alquiler-de-mesas-picnic-para-eventos-y-fiestas.webp
+        Alt text (concepto de la foto): alquiler de mesas picnic para eventos y fiestas
+  [ ] alquiler-de-mobiliario-para-eventos-campestres-bogota.webp
+        Alt text (concepto de la foto): alquiler de mobiliario para eventos campestres bogota
+  [ ] alquiler-de-mobiliario-para-fiestas-en-jardines.webp
+        Alt text (concepto de la foto): alquiler de mobiliario para fiestas en jardines
+  [ ] mesas-picnic-en-bogota.webp
+        Alt text (concepto de la foto): mesas picnic en bogota
+
+--- CALEFACTORES-AMBIENTE-PARA-EVENTOS (13 fotos) ---
+  [ ] calefactores-para-eventos-y-fiestas.webp
+        Alt text (concepto de la foto): calefactores para eventos y fiestas
+  [ ] calefactores-de-ambiente-para-eventos-bogota.webp
+        Alt text (concepto de la foto): calefactores de ambiente para eventos bogota
+  [ ] alquiler-de-calefactor-de-hongo.webp
+        Alt text (concepto de la foto): alquiler de calefactor de hongo
+  [ ] calefactor-de-ambiente-tipo-hongo.webp
+        Alt text (concepto de la foto): calefactor de ambiente tipo hongo
+  [ ] alquiler-de-calefatores-para-fiestas.webp
+        Alt text (concepto de la foto): alquiler de calefatores para fiestas
+  [ ] calefactores-para-fiestas.webp
+        Alt text (concepto de la foto): calefactores para fiestas
+  [ ] Alquiler-de-calefactores-para-fiestas.webp
+        Alt text (concepto de la foto): Alquiler de calefactores para fiestas
+  [ ] renta-de-calefactor-para-eventos.webp
+        Alt text (concepto de la foto): renta de calefactor para eventos
+  [ ] renta-de-calefactores-bogota.webp
+        Alt text (concepto de la foto): renta de calefactores bogota
+  [ ] alquiler-de-calefactores-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de calefactores para fiestas en bogota
+  [ ] calefactores-para-ambiente-en-bogota.webp
+        Alt text (concepto de la foto): calefactores para ambiente en bogota
+  [ ] renta-de-calefactores-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): renta de calefactores para eventos en bogota
+  [ ] calefactores-de-hongo-en-alquiler.webp
+        Alt text (concepto de la foto): calefactores de hongo en alquiler
+
+--- SEPARADORES-DE-FILA-PARA-EVENTOS (8 fotos) ---
+  [ ] alquiler-de-separadores-de-fila-bogota.webp
+        Alt text (concepto de la foto): alquiler de separadores de fila bogota
+  [ ] separadores-de-fila-en-bogota.webp
+        Alt text (concepto de la foto): separadores de fila en bogota
+  [ ] organizadores-de-fila-en-bogota.webp
+        Alt text (concepto de la foto): organizadores de fila en bogota
+  [ ] separadores-de-fila-rojos.webp
+        Alt text (concepto de la foto): separadores de fila rojos
+  [ ] alquiler-de-organizadores-de-fila-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de organizadores de fila para eventos
+  [ ] catenarias-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): catenarias para fiestas en bogota
+  [ ] renta-de-separadores-de-fila.webp
+        Alt text (concepto de la foto): renta de separadores de fila
+  [ ] alquiler-de-catenarias-para-eventos-en-bogota.webp
+        Alt text (concepto de la foto): alquiler de catenarias para eventos en bogota
+
+--- BOMBILLOS-VINTAGE-PARA-EVENTOS (2 fotos) ---
+  [ ] renta-de-bombillos-para-eventos-bogota.webp
+        Alt text (concepto de la foto): renta de bombillos para eventos bogota
+  [ ] alquiler-de-bombillos-vintage-para-eventos.webp
+        Alt text (concepto de la foto): alquiler de bombillos vintage para eventos
+
+--- PISTA-DE-BAILE-PARA-EVENTOS (4 fotos) ---
+  [ ] pistas-de-baile-para-fiestas-en-bogota-asem.webp
+        Alt text (concepto de la foto): 
+  [ ] alquiler-de-pista-infinity-para-eventos-bogota.webp
+        Alt text (concepto de la foto): alquiler de pista infinity para eventos bogota
+  [ ] pista-de-baile-led-para-fiestas-en-bogota.webp
+        Alt text (concepto de la foto): pista de baile led para fiestas en bogota
+  [ ] alquiler-de-pistas-de-baile-para-fiestas.webp
+        Alt text (concepto de la foto): alquiler de pistas de baile para fiestas
+

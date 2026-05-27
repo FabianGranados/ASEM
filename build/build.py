@@ -2249,6 +2249,7 @@ def write_placeholders():
     out_dir = ROOT / 'assets' / 'img'
     out_dir.mkdir(parents=True, exist_ok=True)
     all_imgs = collect_all_images()
+    generados = saltados = 0
     for fn, (alt, page_key) in all_imgs.items():
         out_path = out_dir / fn
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -2256,11 +2257,17 @@ def write_placeholders():
         if ext not in ('.webp', '.jpg', '.jpeg', '.png'):
             ext = '.png'
             out_path = out_path.with_suffix('.png')
+        # NUNCA pisar un archivo que ya existe — protege fotos reales subidas
+        # manualmente. Para regenerar un placeholder, borrarlo a mano primero.
+        if out_path.exists():
+            saltados += 1
+            continue
         try:
             make_placeholder(str(out_path), alt or fn, palette_for(page_key, fn))
+            generados += 1
         except Exception as e:
             print(f'  WARN placeholder {fn}: {e}')
-    print(f'  {len(all_imgs)} placeholders generados.')
+    print(f'  {generados} placeholders nuevos generados, {saltados} archivos existentes preservados.')
 
 def write_page(out_path, html):
     out_path.parent.mkdir(parents=True, exist_ok=True)
