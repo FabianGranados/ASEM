@@ -707,6 +707,7 @@ def faq_block():
 SUBPAGE_CUSTOM = {
     '02_SALAS_LOUNGE': {
         'hero_subtitle': 'Salas lounge en cuero y velvet para bodas, c&oacute;cteles, eventos sociales y empresariales. Configuraci&oacute;n modular seg&uacute;n tu espacio, montaje incluido y entrega puntual en Bogot&aacute;.',
+        'hero_banner': 'hero-salas-lounge-banner.webp',
         'hero_specs': [
             ('M5 11h14v9H5z M7 11V7a5 5 0 0 1 10 0v4', 'Cuero y velvet premium'),
             ('M12 2v4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M2 12h4 M18 12h4', 'Mas de 5 colores'),
@@ -714,6 +715,7 @@ SUBPAGE_CUSTOM = {
             ('M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z', 'Apto interior y exterior'),
         ],
         'gallery_keywords': ['sala', 'lounge', 'loft'],
+        'gallery_blacklist': ['led', 'acapulco', 'rustic'],
         'use_showcase': True,
         'productos_rich': [
             {'name': 'Salas lounge completas', 'desc': 'Sof&aacute;s, poltronas, mesa de centro y cubos para 6-12 personas.',
@@ -1762,10 +1764,13 @@ def render_subpage(key, page):
 
     # Si la subpagina define keywords de galeria, filtrar solo las relacionadas (resto va hidden SEO)
     gallery_kws = custom.get('gallery_keywords')
+    gallery_blacklist = custom.get('gallery_blacklist') or []
     if gallery_kws:
         def is_relevant(img):
             fn = img['file'].lower()
             alt = (img.get('alt') or '').lower()
+            if any(bk in fn or bk in alt for bk in gallery_blacklist):
+                return False
             return any(kw in fn or kw in alt for kw in gallery_kws)
         gallery_imgs = [img for img in all_imgs if is_relevant(img)]
         hidden_imgs = [img for img in all_imgs if not is_relevant(img)]
@@ -2306,6 +2311,7 @@ def write_image_sitemap():
         ('hero-industrial-banner.webp', 'Mobiliario industrial para eventos corporativos - ASEM'),
         ('hero-acapulco-banner.webp', 'Sillas Acapulco multicolor en jardin - ASEM'),
         ('hero-calefactores-banner.webp', 'Calefactores piramide para eventos al aire libre en Bogota - ASEM'),
+        ('hero-salas-lounge-banner.webp', 'Salon de eventos con multiples salas lounge blancas y cojines negros - ASEM'),
     ]
     for key, p in DATA.items():
         if key.startswith('00_'):
