@@ -265,7 +265,7 @@ def footer_html(depth):
         <span class="brand-sep"></span>
         {WORDMARK}
       </a>
-      <p class="footer-tag">Alquiler de mobiliario<br>para eventos en Bogota, Colombia</p>
+      <p class="footer-tag">Alquiler de mobiliario premium<br>para eventos en Bogot&aacute; y alrededores</p>
       <img class="footer-logo-img" src="{img_prefix}assets/img/ASEM-mobiliario-para-eventos-en-bogota.png" alt="ASEM mobiliario para eventos en bogota" loading="lazy" width="160" height="80">
     </div>
     <div class="footer-col">
@@ -304,10 +304,10 @@ def footer_html(depth):
 <a class="wa-float" href="{WA_LINK}" target="_blank" rel="noopener" aria-label="Escribenos por WhatsApp">
   <div class="wa-bubble" aria-hidden="true">
     <div class="wa-msgs">
-      <span class="wa-msg is-active">Estas organizando un evento? Escribeme</span>
+      <span class="wa-msg is-active">&iquest;Est&aacute;s organizando un evento? Escr&iacute;beme</span>
       <span class="wa-msg">Ven, hablamos por WhatsApp</span>
       <span class="wa-msg">Te asesoramos sin compromiso</span>
-      <span class="wa-msg">Cotizacion rapida en minutos</span>
+      <span class="wa-msg">Cotizaci&oacute;n r&aacute;pida en minutos</span>
     </div>
     <div class="wa-typing" aria-hidden="true"><span></span><span></span><span></span></div>
   </div>
@@ -354,13 +354,13 @@ def cta_final_block():
     """Bloque final dorado con boton WhatsApp verde — climax visual antes del footer.
     Headline no usa h1/h2/h3 para no inflar las cuentas SEO del Excel."""
     return f'''<section class="cta-final cta-final-gold" id="contacto">
-  <span class="label reveal">Cuentanos</span>
-  <div class="cta-final-headline reveal" role="heading" aria-level="2">Tienes un evento<br>en mente?</div>
-  <p class="cta-final-sub reveal">Cuentanos y creamos el ambiente perfecto.</p>
+  <span class="label reveal">Cu&eacute;ntanos</span>
+  <div class="cta-final-headline reveal" role="heading" aria-level="2">&iquest;Tienes un evento<br>en mente?</div>
+  <p class="cta-final-sub reveal">Cu&eacute;ntanos qu&eacute; imaginas. Cotizaci&oacute;n r&aacute;pida, montaje incluido, sin compromiso.</p>
   <a class="btn-large btn-wa reveal" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
-  <div class="cta-phones reveal">301 322 8490 &middot; 301 600 3031</div>
+  <div class="cta-phones reveal">Laura 301 322 8490 &middot; Paola 301 600 3031</div>
 </section>'''
 
 # ============================================================
@@ -672,12 +672,12 @@ def render_home(key, page):
     # Cat cards for the 6 estilos
     cards = []
     cat_meta = [
-        ('MOBILIARIO LOUNGE',     'salas-lounge-para-eventos-en-bogota',     'Salas comodas en cuero y velvet para conversacion intima.'),
-        ('MOBILIARIO INDUSTRIAL', 'mesas-sillas-industriales-eventos-bogota','Madera, hierro y luz calida con energia urbana.'),
-        ('MOBILIARIO RÚSTICO',    'salas-rusticas-para-eventos-bogota',      'Texturas naturales para bodas y eventos al aire libre.'),
-        ('MOBILIARIO PICNIC',     'mesas-picnic-para-eventos-bogota',        'Mesas bajas y picnic para encuentros relajados.'),
-        ('MOBILIARIO LED',        'mobiliario-led-eventos-bogota',           'Mobiliario iluminado para fiestas con alma de club.'),
-        ('MOBILIARIO ACAPULCO',   'sillas-acapulco-para-eventos-bogota',     'Sillas iconicas para eventos frescos con aire tropical.'),
+        ('MOBILIARIO LOUNGE',     'salas-lounge-para-eventos-en-bogota',     'Sillones, poltronas y mesas de centro para crear espacios &iacute;ntimos y c&oacute;modos.'),
+        ('MOBILIARIO INDUSTRIAL', 'mesas-sillas-industriales-eventos-bogota','Mesas y sillas con car&aacute;cter &mdash; madera, hierro y luz c&aacute;lida con alma urbana.'),
+        ('MOBILIARIO RÚSTICO',    'salas-rusticas-para-eventos-bogota',      'Madera natural y detalles vintage perfectos para bodas al aire libre.'),
+        ('MOBILIARIO PICNIC',     'mesas-picnic-para-eventos-bogota',        'Mesas, cojines y mantas tipo picnic para encuentros relajados al aire libre.'),
+        ('MOBILIARIO LED',        'mobiliario-led-eventos-bogota',           'Mesas, sillas y barras iluminadas que suben la energ&iacute;a de cualquier fiesta.'),
+        ('MOBILIARIO ACAPULCO',   'sillas-acapulco-para-eventos-bogota',     'Sillas ic&oacute;nicas multicolor para eventos frescos con aire tropical.'),
     ]
     for h3_name, slug_, desc_ in cat_meta:
         img_file = cat_card_images[h3_name]
@@ -697,8 +697,8 @@ def render_home(key, page):
 
     # 2 tarjetas adicionales pendientes de URL final (Silleteria, Ferias) — ya con foto real
     pending_meta = [
-        ('SILLETERÍA', 'Sillas para bodas, banquetes y ceremonias de volumen.', 'silleteria-para-eventos-bogota.webp',  'Silleteria para eventos en Bogota'),
-        ('FERIAS',     'Stands, montajes feriales y activaciones de marca.',   'mobiliario-para-ferias-bogota.webp',     'Mobiliario para ferias en Bogota'),
+        ('SILLETERÍA', 'Sillas Tiffany, banquete y ceremonia. Volumen alto para bodas y eventos masivos.', 'silleteria-para-eventos-bogota.webp',  'Silleteria para eventos en Bogota'),
+        ('FERIAS',     'Mobiliario para stands, activaciones de marca y montajes feriales.',                'mobiliario-para-ferias-bogota.webp',     'Mobiliario para ferias en Bogota'),
     ]
     for h3_name, desc_, img_file, alt_ in pending_meta:
         cards.append(f'''    <div class="cat-card cat-card-pending reveal" role="img" aria-label="{escape(h3_name)}">
@@ -715,10 +715,10 @@ def render_home(key, page):
 
     # Tarjetas de accesorios (mismo estilo cat-card que las anteriores) — linkean a paginas reales
     acc_cat_meta = [
-        ('CALEFACTORES',        'calefactores-ambiente-para-eventos',  'Para que la noche fria no acabe la fiesta antes de tiempo.',          'calefactor-piramide-en-alquiler.webp',          'calefactor piramide en alquiler'),
-        ('PISTA DE BAILE LED',  'pista-de-baile-para-eventos',         'Superficie iluminada que sube la energia a media noche.',           'pista-de-baile-led-para-eventos.webp',          'pista de baile led para eventos'),
-        ('BOMBILLOS VINTAGE',   'bombillos-vintage-para-eventos',      'Cadenas de luces calidas para techos, terrazas y patios.',          'bombillos-vintage-para-eventos.webp',           'bombillos vintage para eventos'),
-        ('SEPARADORES DE FILA', 'separadores-de-fila-para-eventos',    'Para organizar entradas, accesos VIP y areas con flujo elegante.',  'separadores-de-fila-dorados-para-eventos.webp', 'separadores de fila dorados para eventos'),
+        ('CALEFACTORES',        'calefactores-ambiente-para-eventos',  'Calefactores pir&aacute;mide y hongo para que la noche fr&iacute;a no acabe la fiesta.',          'calefactor-piramide-en-alquiler.webp',          'calefactor piramide en alquiler'),
+        ('PISTA DE BAILE LED',  'pista-de-baile-para-eventos',         'Pista LED Infinity 3D &mdash; el efecto t&uacute;nel sube la energ&iacute;a a media noche.',     'pista-de-baile-led-para-eventos.webp',          'pista de baile led para eventos'),
+        ('BOMBILLOS VINTAGE',   'bombillos-vintage-para-eventos',      'Cadenas de bombillos vintage para techos, terrazas y jardines.',                                'bombillos-vintage-para-eventos.webp',           'bombillos vintage para eventos'),
+        ('SEPARADORES DE FILA', 'separadores-de-fila-para-eventos',    'Separadores con cinta retr&aacute;ctil para accesos VIP y flujo organizado.',                   'separadores-de-fila-dorados-para-eventos.webp', 'separadores de fila dorados para eventos'),
     ]
     acc_cards = []
     for h3_name, slug_, desc_, img_file, alt_ in acc_cat_meta:
@@ -755,11 +755,11 @@ def render_home(key, page):
     <div class="hero-slide" style="background-image:url('assets/img/hero-4-parasoles.webp')"></div>
   </div>
   <div class="hero-content">
-    <span class="label anim anim-1">Bogota &middot; Colombia</span>
+    <span class="label anim anim-1">Bogot&aacute; &middot; Colombia &middot; Desde 2014</span>
     <h1 class="anim anim-2">{escape(h1)}</h1>
-    <p class="hero-subtitle anim anim-3">Con el mobiliario perfecto para cada tipo de evento en Bogota.</p>
+    <p class="hero-subtitle anim anim-3">M&aacute;s de 10 a&ntilde;os creando ambientes inolvidables. Mobiliario premium para bodas, c&oacute;cteles, ferias y celebraciones que se recuerdan.</p>
     <div class="hero-ctas anim anim-4">
-      <a href="#catalogo" class="btn btn-outline-light">Ver catalogo</a>
+      <a href="#catalogo" class="btn btn-outline-light">Ver cat&aacute;logo</a>
       <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
     </div>
   </div>
@@ -777,10 +777,10 @@ def render_home(key, page):
 
 <section class="stats">
   <div class="stats-grid">
-    <div class="stat reveal"><div class="stat-num">10+</div><div class="stat-label">Anos de experiencia</div></div>
-    <div class="stat reveal"><div class="stat-num">+500</div><div class="stat-label">Eventos al ano</div></div>
-    <div class="stat reveal"><div class="stat-num">6</div><div class="stat-label">Estilos de mobiliario</div></div>
-    <div class="stat reveal"><div class="stat-num">Bogota</div><div class="stat-label">Y alrededores</div></div>
+    <div class="stat reveal"><div class="stat-num">10+</div><div class="stat-label">A&ntilde;os en eventos</div></div>
+    <div class="stat reveal"><div class="stat-num">+500</div><div class="stat-label">Eventos al a&ntilde;o</div></div>
+    <div class="stat reveal"><div class="stat-num">12</div><div class="stat-label">Estilos disponibles</div></div>
+    <div class="stat reveal"><div class="stat-num">Bogot&aacute;</div><div class="stat-label">Y alrededores</div></div>
   </div>
 </section>
 
@@ -791,8 +791,9 @@ def render_home(key, page):
       <p class="title-section">Estilos que ambientan<br>tu evento.</p>
     </div>
     <p class="section-head-aside reveal">
-      Cada coleccion esta pensada para un tipo de evento.
-      Mezclamos piezas para que el ambiente cuente tu historia.
+      Cada colecci&oacute;n est&aacute; pensada para un tipo de evento.
+      Mezclamos piezas para que el ambiente cuente tu historia y tus
+      invitados se sientan parte de algo especial.
     </p>
   </div>
   <div class="catalogo-grid">
@@ -807,7 +808,7 @@ def render_home(key, page):
       <p class="title-section">Detalles que cierran<br>la experiencia.</p>
     </div>
     <p class="section-head-aside reveal">
-      Mas alla del mobiliario: iluminacion, calefaccion y elementos
+      M&aacute;s all&aacute; del mobiliario: iluminaci&oacute;n, calefacci&oacute;n y elementos
       que terminan de ambientar y de cuidar a tus invitados.
     </p>
   </div>
@@ -818,7 +819,7 @@ def render_home(key, page):
 
 <section class="cta-block">
   <h2>{escape(h2_habla)}</h2>
-  <p class="cta-block-sub">Tienes dudas o necesitas una cotizacion rapida? Comunicate con nuestra area comercial y recibe asesoria personalizada para tu evento.</p>
+  <p class="cta-block-sub">&iquest;Tienes dudas o necesitas cotizaci&oacute;n r&aacute;pida? Te respondemos por WhatsApp en minutos &mdash; propuesta clara, precio cerrado, sin compromiso.</p>
   <a class="btn-large btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Hablar por WhatsApp
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 5 7 7-7 7"></path></svg>
   </a>
@@ -830,7 +831,7 @@ def render_home(key, page):
   <h3>{escape(h3_siguenos)}</h3>
   <a class="ig-link" href="https://instagram.com/alquilersalasparaeventos" target="_blank" rel="noopener">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>
-    Siguenos en Instagram
+    Ver montajes recientes
   </a>
 </section>
 
@@ -839,9 +840,9 @@ def render_home(key, page):
   <div class="showcase-bg-overlay" aria-hidden="true"></div>
 
   <div class="showcase-head">
-    <span class="label on-dark">Galeria</span>
+    <span class="label on-dark">Galer&iacute;a</span>
     <h2 class="on-dark">{escape(h2_eventos)}</h2>
-    <p class="showcase-sub">Algunos de los eventos que hemos ambientado en Bogota.</p>
+    <p class="showcase-sub">Bodas, c&oacute;cteles, ferias, lanzamientos y eventos corporativos que hemos ambientado en Bogot&aacute;.</p>
   </div>
 
   <div class="showcase" id="showcase">
