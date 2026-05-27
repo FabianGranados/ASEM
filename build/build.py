@@ -1029,6 +1029,7 @@ SUBPAGE_CUSTOM = {
     },
     '10_MOB_INDUSTRIAL': {
         'hero_subtitle': 'Mobiliario industrial en hierro y madera para ferias, eventos corporativos y activaciones de marca. Mesas, sillas, barras y lamparas estilo loft urbano con car&aacute;cter.',
+        'hero_banner': 'hero-industrial-banner.webp',
         'hero_specs': [
             ('M4 6h16v3H4z M4 14h16v3H4z M8 9v5 M16 9v5', 'Hierro + madera'),
             ('M3 5h6v6H3z M15 5h6v6h-6z M3 13h6v6H3z M15 13h6v6h-6z', 'Estilo loft urbano'),
