@@ -586,6 +586,10 @@ def head_html(title, description, canonical, depth, og_image_filename=None, json
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cache control: browser revalidates HTML each visit (assets siguen cacheables via ?v=) -->
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(description)}">
 <link rel="canonical" href="{og_url}">
@@ -2301,9 +2305,11 @@ def main():
             print(f'  {page["slug"]}/index.html  <- {key}')
     write_sitemap()
     write_robots()
+    # Version file para auto-detection de actualizaciones (cache busting)
+    (ROOT / 'version.txt').write_text(ASSET_VERSION + '\n')
     # 404 page
     write_page(ROOT / '404.html', render_404())
-    print('Sitemap + robots.txt + 404.html OK')
+    print('Sitemap + robots.txt + 404.html + version.txt OK')
 
 if __name__ == '__main__':
     main()

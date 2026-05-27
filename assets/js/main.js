@@ -1,6 +1,47 @@
 /* Marca html.js para que el CSS aplique animaciones */
 document.documentElement.classList.add('js');
 
+/* Auto-detect site updates (workaround del CDN cache de GitHub Pages).
+   Hace polling de /version.txt cada 90s. Si la version cambia, muestra
+   un banner discreto con boton para recargar. */
+(function () {
+  var CURRENT_VERSION = null;
+  var POLL_INTERVAL = 90000;  // 90 segundos
+  function fetchVersion() {
+    fetch('/version.txt?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.text(); })
+      .then(function (v) {
+        v = v.trim();
+        if (!CURRENT_VERSION) {
+          CURRENT_VERSION = v;
+          return;
+        }
+        if (v !== CURRENT_VERSION) {
+          showUpdateBanner();
+        }
+      })
+      .catch(function () { /* offline ok */ });
+  }
+  function showUpdateBanner() {
+    if (document.getElementById('site-update-banner')) return;
+    var bar = document.createElement('div');
+    bar.id = 'site-update-banner';
+    bar.innerHTML = '<span>Hay una versión nueva del sitio.</span> <button type="button">Actualizar</button>';
+    bar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#0D2A32;color:#fff;padding:10px 16px;display:flex;justify-content:center;align-items:center;gap:14px;font:14px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.3);';
+    var btn = bar.querySelector('button');
+    btn.style.cssText = 'background:#40B0CB;color:#0D2A32;border:0;padding:6px 14px;border-radius:3px;font-weight:600;cursor:pointer;font-family:inherit;';
+    btn.addEventListener('click', function () {
+      // Hard reload con timestamp para bypassear CDN
+      var url = window.location.pathname + '?v=' + Date.now() + window.location.hash;
+      window.location.replace(url);
+    });
+    document.body.appendChild(bar);
+  }
+  // Primera lectura inmediata, luego polling
+  fetchVersion();
+  setInterval(fetchVersion, POLL_INTERVAL);
+})();
+
 /* Anti-robo de imagenes — bloquea click derecho y drag-and-drop sobre <img>.
    Detiene el ~95% del robo casual. No detiene DevTools ni screenshots
    (eso es imposible en navegador), pero detiene "click derecho > guardar". */
