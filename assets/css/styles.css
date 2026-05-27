@@ -947,6 +947,105 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .faq-a { padding: 0 18px 18px; font-size: 14.5px; }
 }
 
+/* ============================================================ HERO SPECS PILLS (subpaginas) */
+.hero-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px auto 32px;
+  max-width: 920px;
+  justify-content: center;
+}
+.hero-spec {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(64,176,203,0.25);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.hero-spec svg {
+  width: 16px;
+  height: 16px;
+  color: var(--turquesa);
+  flex-shrink: 0;
+}
+@media (max-width: 540px) {
+  .hero-spec { font-size: 12px; padding: 7px 11px; }
+  .hero-spec svg { width: 14px; height: 14px; }
+}
+
+/* Showcase H3 (en subpaginas) — diferente del home que usa H2 */
+.showcase-section .showcase-h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(20px, 2.6vw, 28px);
+  letter-spacing: 1px;
+  color: var(--blanco);
+  margin: 12px auto;
+  max-width: 760px;
+  line-height: 1.4;
+}
+
+/* SEO hidden images — presentes en DOM para Google, invisibles al usuario */
+.seo-imgs {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================ STICKY WHATSAPP MOBILE BAR */
+.wa-sticky-mobile {
+  display: none;  /* solo aparece en mobile + cuando se scrollea */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 199;
+  background: var(--wa-green);
+  color: #fff !important;
+  text-decoration: none;
+  padding: 14px 16px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 -6px 20px rgba(0,0,0,0.18);
+  transform: translateY(100%);
+  transition: transform 0.35s ease;
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+.wa-sticky-mobile.is-visible { transform: translateY(0); }
+.wa-sticky-mobile svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+@media (max-width: 767px) {
+  .wa-sticky-mobile { display: flex; }
+  /* Esconder el floating cuando esta el sticky activo */
+  .wa-sticky-mobile.is-visible ~ .wa-float { opacity: 0; pointer-events: none; }
+  /* Agregar padding al body para no tapar el footer */
+  body { padding-bottom: env(safe-area-inset-bottom); }
+  .footer { padding-bottom: 90px; }
+}
+
 /* ============================================================ PRODUCTOS RICH (subpaginas) */
 .productos-section { background: var(--blanco); padding: 64px 5vw; }
 .productos-inner { max-width: 1080px; margin: 0 auto; }

@@ -79,6 +79,18 @@ document.documentElement.classList.add('js');
   start();
 })();
 
+/* Sticky WhatsApp mobile — aparece despues de scroll inicial (>200px) */
+(function () {
+  var sticky = document.querySelector('.wa-sticky-mobile');
+  if (!sticky) return;
+  function onScroll() {
+    if (window.scrollY > 200) sticky.classList.add('is-visible');
+    else sticky.classList.remove('is-visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
 /* WhatsApp floating bubble — rota frases con typing indicator (simula chat) */
 (function () {
   var bubble = document.querySelector('.wa-bubble');

@@ -555,6 +555,11 @@ def footer_html(depth):
   </div>
 </footer>
 
+<a class="wa-sticky-mobile" href="{WA_LINK}" target="_blank" rel="noopener" aria-label="Cotizar por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.692 5.543l-.999 3.648 3.796-.99zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path></svg>
+  Cotizar por WhatsApp
+</a>
+
 <a class="wa-float" href="{WA_LINK}" target="_blank" rel="noopener" aria-label="Escribenos por WhatsApp">
   <div class="wa-bubble" aria-hidden="true">
     <div class="wa-msgs">
@@ -692,6 +697,16 @@ def faq_block():
 SUBPAGE_CUSTOM = {
     '09_MOBILIARIO_LED': {
         'hero_subtitle': 'Mesas, barras, poltronas y mesas altas LED que transforman cualquier espacio. Colores ajustables, bater&iacute;a de 8-10 horas, ideales para fiestas nocturnas, c&oacute;cteles y eventos corporativos en Bogot&aacute;.',
+        # Specs rapidos visibles al lado del hero (B2B-friendly)
+        'hero_specs': [
+            ('M8 5h8 M10 3v2 M14 3v2 M9 8h6v9a3 3 0 0 1-3 3h0a3 3 0 0 1-3-3z', '8-10h bateria'),
+            ('M12 2v4 M12 18v4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M2 12h4 M18 12h4 M4.93 19.07l2.83-2.83 M16.24 7.76l2.83-2.83', '16 colores RGB'),
+            ('M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'Apto exterior'),
+            ('M3 7h18 M5 7v13h14V7 M9 10h6 M9 14h6 M9 18h6', 'Montaje incluido'),
+        ],
+        # Showcase usa solo fotos LED (las "Otras Referencias" quedan en DOM ocultas para SEO)
+        'gallery_keywords': ['led', 'iluminad', 'mobiliario-para-eventos-en-bogota'],
+        'use_showcase': True,
         'productos_rich': [
             {
                 'name': 'Mesas iluminadas LED',
@@ -825,6 +840,80 @@ def render_faq_subpage(faqs, eyebrow='Preguntas frecuentes', title='Lo que m&aac
     </div>
   </div>
 </section>'''
+
+def render_showcase_subpage(gallery_images_filtered, h3_caption='Explora algunos de nuestros montajes:'):
+    """Showcase interactivo (mismo formato del home): 1 foto al frente +
+    fondo blureado de la misma + flechas + counter + caption."""
+    if not gallery_images_filtered:
+        return ''
+    imgs_html = []
+    for i, img in enumerate(gallery_images_filtered):
+        cls = 'showcase-img is-active' if i == 0 else 'showcase-img'
+        imgs_html.append(f'      <img class="{cls}" src="../assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" data-idx="{i}" loading="lazy">')
+    first_src = f'../assets/img/{escape(gallery_images_filtered[0]["file"])}'
+    total = len(gallery_images_filtered)
+    first_alt = escape(gallery_images_filtered[0]['alt']) if gallery_images_filtered else ''
+    return f'''<section class="showcase-section" id="galeria">
+  <div class="showcase-bg" id="showcaseBg" style="background-image:url('{first_src}')" aria-hidden="true"></div>
+  <div class="showcase-bg-overlay" aria-hidden="true"></div>
+
+  <div class="showcase-head">
+    <span class="label on-dark">Galer&iacute;a de montajes</span>
+    <h3 class="showcase-h3">{escape(h3_caption)}</h3>
+  </div>
+
+  <div class="showcase" id="showcase">
+    <button class="showcase-arrow showcase-prev" id="showcasePrev" type="button" aria-label="Foto anterior">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </button>
+    <div class="showcase-frame">
+      <div class="showcase-imgs" id="showcaseImgs">
+{chr(10).join(imgs_html)}
+      </div>
+    </div>
+    <button class="showcase-arrow showcase-next" id="showcaseNext" type="button" aria-label="Foto siguiente">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+    </button>
+  </div>
+  <div class="showcase-footer">
+    <div class="showcase-caption" id="showcaseCaption">{first_alt}</div>
+    <div class="showcase-counter">
+      <span class="showcase-current" id="showcaseCurrent">01</span>
+      <span class="showcase-divider">/</span>
+      <span class="showcase-total">{total:02d}</span>
+    </div>
+  </div>
+</section>'''
+
+def render_specs_pills(specs):
+    """Pills de specs rapidos en el hero (icono + texto). B2B-friendly."""
+    if not specs:
+        return ''
+    items = []
+    for icon_path, text in specs:
+        # icon_path puede tener multiples segmentos separados por espacios + M
+        paths = ''.join(f'<path d="{seg.strip()}"/>' for seg in icon_path.split('M') if seg.strip()).replace('<path d="', '<path d="M')
+        items.append(f'''    <span class="hero-spec">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{paths}</svg>
+      {text}
+    </span>''')
+    return f'''<div class="hero-specs anim anim-3" aria-label="Caracteristicas">
+{chr(10).join(items)}
+  </div>'''
+
+def render_hidden_seo_imgs(images_filtered_out):
+    """Mantiene en el DOM las <img> que no van al showcase (preservacion SEO).
+    Google las indexa, usuarios no las ven."""
+    if not images_filtered_out:
+        return ''
+    imgs = []
+    for img in images_filtered_out:
+        if 'ASEM-mobiliario' in img['file']:
+            continue  # logo no necesita estar duplicado aqui (ya esta en footer)
+        imgs.append(f'  <img src="../assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy">')
+    if not imgs:
+        return ''
+    return f'<div class="seo-imgs" aria-hidden="true">\n{chr(10).join(imgs)}\n</div>'
 
 def render_testimonios_subpage(review_indices):
     """Testimonios reducidos (3 cards) para subpaginas. Usa indices de REVIEWS."""
@@ -965,10 +1054,12 @@ def render_subpage(key, page):
 
     # Hero interior — usa hero_subtitle custom si existe, sino la meta description
     hero_sub = custom.get('hero_subtitle') or escape(desc)
+    specs_html = render_specs_pills(custom.get('hero_specs'))
     hero = f'''<section class="hero-inner">
   <div class="breadcrumbs"><a href="../">Inicio</a> &nbsp;&middot;&nbsp; {escape(h1.replace("Alquiler de ", "").replace(" en Bogotá para Eventos", ""))}</div>
   <h1>{escape(h1)}</h1>
   <p class="hero-sub">{hero_sub}</p>
+  {specs_html}
   <div class="hero-ctas">
     <a class="btn btn-wa" href="{WA_LINK}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
     <a class="btn btn-outline-light" href="#galeria">Ver galeria</a>
@@ -998,18 +1089,32 @@ def render_subpage(key, page):
   </div>
 </section>'''
 
-    # Galeria con H3 explora
+    # Galeria
     gallery_h3 = h3_explora or 'Explora algunos de nuestros montajes:'
-    gallery_imgs = []
-    for img in images:
-        # Skip ASEM logo at the bottom
-        if 'ASEM-mobiliario-para-eventos-en-bogota' in img['file']:
-            continue
-        gallery_imgs.append(img)
-    figs = '\n'.join(
-        f'      <figure class="reveal"><img src="../assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>'
-        for img in gallery_imgs)
-    gallery_html = f'''<section class="galeria-interior" id="galeria">
+    # Imagenes sin el logo de footer
+    all_imgs = [img for img in images if 'ASEM-mobiliario-para-eventos-en-bogota' not in img['file']]
+
+    # Si la subpagina define keywords de galeria, filtrar solo las relacionadas (resto va hidden SEO)
+    gallery_kws = custom.get('gallery_keywords')
+    if gallery_kws:
+        def is_relevant(img):
+            fn = img['file'].lower()
+            alt = (img.get('alt') or '').lower()
+            return any(kw in fn or kw in alt for kw in gallery_kws)
+        gallery_imgs = [img for img in all_imgs if is_relevant(img)]
+        hidden_imgs = [img for img in all_imgs if not is_relevant(img)]
+    else:
+        gallery_imgs = all_imgs
+        hidden_imgs = []
+
+    # Showcase (cinematografico) o masonry tradicional segun config
+    if custom.get('use_showcase'):
+        gallery_html = render_showcase_subpage(gallery_imgs, h3_caption=gallery_h3)
+    else:
+        figs = '\n'.join(
+            f'      <figure class="reveal"><img src="../assets/img/{escape(img["file"])}" alt="{escape(img["alt"])}" loading="lazy"></figure>'
+            for img in gallery_imgs)
+        gallery_html = f'''<section class="galeria-interior" id="galeria">
   <div class="galeria-interior-inner">
     <div class="galeria-eyebrow" role="heading" aria-level="2">Galeria de montajes</div>
     <h3>{escape(gallery_h3)}</h3>
@@ -1018,6 +1123,9 @@ def render_subpage(key, page):
     </div>
   </div>
 </section>'''
+
+    # SEO hidden imgs: filtradas fuera del showcase pero presentes en DOM
+    seo_hidden_html = render_hidden_seo_imgs(hidden_imgs)
 
     # Ventajas — usa h2 si Excel lo lista en H2, h3 si lo lista en H3, span si no esta
     ventajas_title = h2_ventajas or h3_ventajas
@@ -1107,6 +1215,7 @@ def render_subpage(key, page):
 {faq_html_sub}
 {referencias_html}
 {cta_final_block()}
+{seo_hidden_html}
 {footer_html(depth)}
 <script src="{asset('assets/js/main.js', depth)}?v={ASSET_VERSION}"></script>
 </body>
