@@ -2,51 +2,102 @@
 """
 ASEM — Watermark de imagenes (proteccion contra robo).
 
-Procesa todas las imagenes en assets/img/ y agrega un watermark sutil
-"ASEM" en la esquina inferior derecha. Mantiene formato y filename
-originales (sobreescribe).
+Procesa imagenes en assets/img/ y agrega el isologo de ASEM centrado,
+sutil y semi-transparente. El isologo replica exactamente al del navbar
+(4 postes + viga + asiento turquesa + techo triangular).
+
+Posicion central = dificil cropear sin destruir la foto.
+Sutil + transparente = no afea la imagen.
+
+Excluye automaticamente:
+  - hero-*.webp (el hero ya tiene overlay + texto encima)
+  - ASEM-mobiliario-* (es el logo de ASEM, no necesita marca)
 
 Uso:
-  python3 build/watermark.py            # marca solo las nuevas (no marcadas)
-  python3 build/watermark.py --force    # re-marca todas (peligro: doble watermark)
-
-Idempotencia: lleva un manifest en build/.watermarked.json con
-(filename, size_bytes). Si una foto cambia de tamano (nueva subida),
-se re-marca automaticamente.
+  python3 build/watermark.py            # marca las nuevas
+  python3 build/watermark.py --force    # re-marca todas (peligro: doble)
 """
 import json
 import os
 import sys
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 IMG_DIR = ROOT / 'assets' / 'img'
 MANIFEST = ROOT / 'build' / '.watermarked.json'
 
-# Estos archivos NO se marcan (logos / brand assets)
+# NO marcar estos archivos
 SKIP_PATTERNS = [
     'ASEM-mobiliario-para-eventos-en-bogota',  # logo del footer
+    'hero-1-salas-lounge',
+    'hero-2-mobiliario-rustico',
+    'hero-3-sillas-acapulco',
+    'hero-4-parasoles',
+    'evento-mockup',  # mockups reservados
 ]
 
 def should_skip(filename: str) -> bool:
     return any(p in filename for p in SKIP_PATTERNS)
 
-def get_font(size: int):
-    candidates = [
-        '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
-        '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
-        '/System/Library/Fonts/Helvetica.ttc',
-    ]
-    for path in candidates:
-        if os.path.exists(path):
-            return ImageFont.truetype(path, size)
-    return ImageFont.load_default()
+def draw_isologo(target_img: Image.Image, size: int, alpha_white: int = 130, alpha_turquesa: int = 115):
+    """Dibuja el isologo de ASEM en una capa transparente del tamano dado.
+    Replica exacto el SVG del navbar (viewBox 72x82).
+    Devuelve una Image RGBA lista para pegar."""
+    # Calcular dimensiones: viewBox es 72x82
+    s = size / 72.0
+    iso_w = size
+    iso_h = int(82 * s)
+
+    iso = Image.new('RGBA', (iso_w, iso_h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(iso)
+
+    WHITE = (255, 255, 255, alpha_white)
+    TURQ = (64, 176, 203, alpha_turquesa)
+
+    def rect(x1, y1, x2, y2, fill):
+        d.rectangle([(x1 * s, y1 * s), (x2 * s, y2 * s)], fill=fill)
+
+    # Triangulo del techo: points (36,0), (54,22), (18,22)
+    d.polygon([(36 * s, 0), (54 * s, 22 * s), (18 * s, 22 * s)], fill=WHITE)
+    # Postes verticales internos (cabecera): x=0, y=22, w=9, h=32  |  x=63, y=22, w=9, h=32
+    rect(0, 22, 9, 54, WHITE)
+    rect(63, 22, 72, 54, WHITE)
+    # Asiento turquesa: x=9, y=36, w=54, h=19
+    rect(9, 36, 63, 55, TURQ)
+    # Viga horizontal superior del asiento: x=0, y=51, w=72, h=9
+    rect(0, 51, 72, 60, WHITE)
+    # Pies inferiores: x=0, y=58, w=6, h=14  |  x=66, y=58, w=6, h=14
+    rect(0, 58, 6, 72, WHITE)
+    rect(66, 58, 72, 72, WHITE)
+
+    # Sombra suave detras para legibilidad sobre cualquier fondo (incluso blanco)
+    shadow_pad = 28
+    shadow = Image.new('RGBA', (iso_w + shadow_pad * 2, iso_h + shadow_pad * 2), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(shadow)
+    OFS = shadow_pad
+    SHADOW_ALPHA = 130  # mas opaca para que el iso destaque sobre fondos claros
+
+    def s_rect(x1, y1, x2, y2):
+        sd.rectangle([(x1 * s + OFS, y1 * s + OFS), (x2 * s + OFS, y2 * s + OFS)], fill=(0, 0, 0, SHADOW_ALPHA))
+
+    sd.polygon([(36 * s + OFS, 0 + OFS), (54 * s + OFS, 22 * s + OFS), (18 * s + OFS, 22 * s + OFS)], fill=(0, 0, 0, SHADOW_ALPHA))
+    s_rect(0, 22, 9, 54)
+    s_rect(63, 22, 72, 54)
+    s_rect(9, 36, 63, 55)
+    s_rect(0, 51, 72, 60)
+    s_rect(0, 58, 6, 72)
+    s_rect(66, 58, 72, 72)
+    shadow = shadow.filter(ImageFilter.GaussianBlur(radius=7))
+
+    # Componer: sombra primero, iso encima
+    final = Image.new('RGBA', (iso_w + 30, iso_h + 30), (0, 0, 0, 0))
+    final.alpha_composite(shadow)
+    final.alpha_composite(iso, dest=(OFS, OFS))
+    return final, OFS  # devuelve el padding tambien
 
 def add_watermark(image_path: Path) -> bool:
-    """Watermark 'ASEM' centrado con colores de marca (A blanco, S turquesa,
-    E suave, M dorado) semi-transparente. Posicion centrada = mas dificil de
-    cropear sin destruir la imagen."""
+    """Pega el isologo de ASEM centrado, sutil. Devuelve True si proceso OK."""
     try:
         img = Image.open(image_path)
     except Exception as e:
@@ -59,65 +110,30 @@ def add_watermark(image_path: Path) -> bool:
     if max(W, H) < 300:
         return False
 
-    # Tamano grande para que sea dificil cropear: 22% del lado mayor
-    font_size = max(48, int(max(W, H) * 0.22))
-    font = get_font(font_size)
-
-    # Colores de marca de ASEM (mismos que el wordmark del navbar/footer)
-    # Alpha 110/255 (~43%) — suficiente para identificar, no para tapar la foto
-    ALPHA = 110
-    letters = [
-        ('A', (255, 255, 255, ALPHA)),   # blanco
-        ('S', (64, 176, 203, ALPHA)),    # turquesa
-        ('E', (168, 221, 233, ALPHA)),   # suave
-        ('M', (240, 192, 96, ALPHA)),    # dorado
-    ]
-
-    # Trabajar en RGBA para soporte de transparencia
     img_rgba = img.convert('RGBA') if img.mode != 'RGBA' else img
-    overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(overlay)
 
-    # Medir cada letra y calcular spacing tipo navbar (letter-spacing generoso)
-    letter_metrics = []
-    for ch, _ in letters:
-        bbox = draw.textbbox((0, 0), ch, font=font)
-        letter_metrics.append({'w': bbox[2] - bbox[0], 'h': bbox[3] - bbox[1], 'top': bbox[1]})
+    # Tamano del isologo: 9% del lado mayor (cubre suficiente para ser visible
+    # sin tapar la foto). El iso tiene aspect 72/82 = ~0.88 (un poco mas alto que ancho)
+    iso_size = max(60, int(max(W, H) * 0.09))
+    iso_layer, ofs = draw_isologo(img_rgba, iso_size, alpha_white=130, alpha_turquesa=115)
+    iso_w, iso_h = iso_layer.size
 
-    letter_spacing = int(font_size * 0.18)  # gap entre letras
-    total_w = sum(m['w'] for m in letter_metrics) + letter_spacing * (len(letters) - 1)
-    max_h = max(m['h'] for m in letter_metrics)
+    # Centrar
+    x = (W - iso_w) // 2
+    y = (H - iso_h) // 2
 
-    # Centrar horizontal y vertical
-    start_x = (W - total_w) / 2
-    y = (H - max_h) / 2 - letter_metrics[0]['top']
-
-    # Stroke (outline) negro semi-transparente para que las letras sean
-    # legibles sobre cualquier fondo (claro u oscuro)
-    stroke_w = max(2, font_size // 60)
-
-    current_x = start_x
-    for i, (ch, color) in enumerate(letters):
-        try:
-            draw.text((current_x, y), ch, font=font, fill=color,
-                      stroke_width=stroke_w, stroke_fill=(0, 0, 0, 90))
-        except TypeError:
-            # Pillow viejos sin stroke_width
-            draw.text((current_x, y), ch, font=font, fill=color)
-        current_x += letter_metrics[i]['w'] + letter_spacing
-
-    watermarked = Image.alpha_composite(img_rgba, overlay)
+    img_rgba.alpha_composite(iso_layer, dest=(x, y))
 
     # Guardar en formato original
     ext = image_path.suffix.lower()
     if ext in ('.jpg', '.jpeg') or fmt == 'JPEG':
-        watermarked.convert('RGB').save(image_path, 'JPEG', quality=88)
+        img_rgba.convert('RGB').save(image_path, 'JPEG', quality=88)
     elif ext == '.webp' or fmt == 'WEBP':
-        watermarked.save(image_path, 'WEBP', quality=85)
+        img_rgba.save(image_path, 'WEBP', quality=85)
     elif ext == '.png' or fmt == 'PNG':
-        watermarked.save(image_path, 'PNG')
+        img_rgba.save(image_path, 'PNG')
     else:
-        watermarked.save(image_path)
+        img_rgba.save(image_path)
     return True
 
 def load_manifest() -> dict:
