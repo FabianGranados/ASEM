@@ -405,6 +405,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   cursor: default;
   background: linear-gradient(135deg, var(--oscuro) 0%, var(--profundo) 60%, var(--turquesa) 100%);
 }
+/* Si la card pending tiene foto, oculta el gradient y muestra la imagen */
+.cat-card-pending:has(img) { background: var(--oscuro); }
+.cat-card-pending:has(img)::before { display: none; }
 .cat-card-pending::before {
   content: '';
   position: absolute;

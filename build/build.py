@@ -681,13 +681,14 @@ def render_home(key, page):
       </div>
     </a>''')
 
-    # 2 tarjetas adicionales pendientes de URL final (Silleteria, Ferias)
+    # 2 tarjetas adicionales pendientes de URL final (Silleteria, Ferias) — ya con foto real
     pending_meta = [
-        ('SILLETERÍA', 'Sillas para bodas, banquetes y ceremonias de volumen.'),
-        ('FERIAS',     'Stands, montajes feriales y activaciones de marca.'),
+        ('SILLETERÍA', 'Sillas para bodas, banquetes y ceremonias de volumen.', 'silleteria-para-eventos-bogota.webp',  'Silleteria para eventos en Bogota'),
+        ('FERIAS',     'Stands, montajes feriales y activaciones de marca.',   'mobiliario-para-ferias-bogota.webp',     'Mobiliario para ferias en Bogota'),
     ]
-    for h3_name, desc_ in pending_meta:
+    for h3_name, desc_, img_file, alt_ in pending_meta:
         cards.append(f'''    <div class="cat-card cat-card-pending reveal" role="img" aria-label="{escape(h3_name)}">
+      <img src="assets/img/{escape(img_file)}" alt="{escape(alt_)}" loading="lazy">
       <div class="cat-card-overlay-rest">
         <h3 class="cat-card-name">{escape(h3_name)}</h3>
       </div>
