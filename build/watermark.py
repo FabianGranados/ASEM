@@ -58,8 +58,9 @@ def add_watermark(image_path: Path) -> bool:
     if max(W, H) < 300:
         return False
 
-    # Tamano de fuente: 3.2% del lado mayor
-    font_size = max(18, int(max(W, H) * 0.032))
+    # Tamano de fuente: 5% del lado mayor (mas grande para ser visible incluso
+    # cuando la imagen se reduce/crop en cards). Minimo absoluto 24px.
+    font_size = max(24, int(max(W, H) * 0.05))
     font = get_font(font_size)
     text = 'ASEM'
 
@@ -73,17 +74,24 @@ def add_watermark(image_path: Path) -> bool:
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
 
-    # Posicion: esquina inferior derecha con margen 2.5% del lado mayor
-    margin = int(max(W, H) * 0.025)
+    # Posicion: esquina inferior derecha con margen 3% del lado mayor
+    margin = int(max(W, H) * 0.03)
     x = W - text_w - margin
     y = H - text_h - margin - bbox[1]
 
-    # Sombra suave (ayuda a leer sobre fondos claros)
-    shadow_offset = max(1, font_size // 14)
+    # Pad y radio para la "pill" de fondo (mejora legibilidad sobre cualquier color)
+    pad_x = max(8, font_size // 4)
+    pad_y = max(4, font_size // 8)
+    pill_box = [x - pad_x, y - pad_y, x + text_w + pad_x, y + text_h + pad_y]
+    # Dibujar pill semi-transparente oscuro
+    draw.rounded_rectangle(pill_box, radius=pad_y + 4, fill=(0, 0, 0, 110))
+
+    # Sombra del texto (refuerzo)
+    shadow_offset = max(1, font_size // 18)
     draw.text((x + shadow_offset, y + shadow_offset), text,
-              font=font, fill=(0, 0, 0, 110))
-    # Texto principal blanco semitransparente
-    draw.text((x, y), text, font=font, fill=(255, 255, 255, 185))
+              font=font, fill=(0, 0, 0, 160))
+    # Texto principal blanco mucho mas opaco
+    draw.text((x, y), text, font=font, fill=(255, 255, 255, 235))
 
     watermarked = Image.alpha_composite(img_rgba, overlay)
 

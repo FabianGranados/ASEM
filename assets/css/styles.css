@@ -411,6 +411,27 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .catalogo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; max-width: 1320px; margin: 0 auto; }
 .cat-card { position: relative; height: 340px; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--oscuro); display: block; }
 
+/* Watermark CSS visible sobre cada card (refuerzo visual, no se descarga con la imagen) */
+.cat-card::before {
+  content: 'ASEM';
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  z-index: 4;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.9);
+  padding: 3px 8px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+.cat-card-pending::before { content: 'ASEM'; }
+
 /* Tarjetas "Pronto" sin URL aun — fondo gradiente, no clickeables */
 .cat-card-pending {
   cursor: default;
@@ -564,6 +585,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
   box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(64,176,203,0.1);
   background: var(--oscuro);
+}
+/* Watermark CSS encima del showcase (refuerzo visual del watermark embebido) */
+.showcase-frame::after {
+  content: 'ASEM';
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  z-index: 4;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.95);
+  padding: 4px 10px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 3px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  pointer-events: none;
 }
 .showcase-imgs {
   position: relative;
