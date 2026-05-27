@@ -76,7 +76,7 @@ def draw_isologo(target_img: Image.Image, size: int, alpha_white: int = 130, alp
     shadow = Image.new('RGBA', (iso_w + shadow_pad * 2, iso_h + shadow_pad * 2), (0, 0, 0, 0))
     sd = ImageDraw.Draw(shadow)
     OFS = shadow_pad
-    SHADOW_ALPHA = 130  # mas opaca para que el iso destaque sobre fondos claros
+    SHADOW_ALPHA = 95  # suficiente para legibilidad sin sobrecargar al iso transparente
 
     def s_rect(x1, y1, x2, y2):
         sd.rectangle([(x1 * s + OFS, y1 * s + OFS), (x2 * s + OFS, y2 * s + OFS)], fill=(0, 0, 0, SHADOW_ALPHA))
@@ -115,7 +115,7 @@ def add_watermark(image_path: Path) -> bool:
     # Tamano del isologo: 9% del lado mayor (cubre suficiente para ser visible
     # sin tapar la foto). El iso tiene aspect 72/82 = ~0.88 (un poco mas alto que ancho)
     iso_size = max(60, int(max(W, H) * 0.09))
-    iso_layer, ofs = draw_isologo(img_rgba, iso_size, alpha_white=130, alpha_turquesa=115)
+    iso_layer, ofs = draw_isologo(img_rgba, iso_size, alpha_white=90, alpha_turquesa=78)
     iso_w, iso_h = iso_layer.size
 
     # Centrar
