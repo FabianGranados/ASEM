@@ -15,7 +15,7 @@ get_photo() {
     salas-rusticas-para-eventos-bogota)        echo "hero-2-mobiliario-rustico.webp" ;;
     comedores-rusticos-eventos-bogota)         echo "hero-comedores-rusticos-banner.webp" ;;
     mesas-para-eventos-bogota)                 echo "hero-mesas-banner.webp" ;;
-    mesas-picnic-para-eventos-bogota)          echo "" ;;  # empty
+    mesas-picnic-para-eventos-bogota)          echo "hero-picnic-banner.webp" ;;
     mesas-sillas-industriales-eventos-bogota)  echo "hero-industrial-banner.webp" ;;
     sillas-para-eventos-bogota)                echo "hero-sillas-lounge-banner.webp" ;;
     sillas-para-juntas-bogota)                 echo "hero-sillas-interlocutoras-banner.webp" ;;
