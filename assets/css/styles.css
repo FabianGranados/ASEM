@@ -1621,3 +1621,124 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .combinacion-grid, .combinacion-grid.is-six { grid-template-columns: 1fr; gap: 24px; }
   .combinacion-card-photo { aspect-ratio: 4 / 3; }
 }
+
+/* ========== Combina hero (post-galeria, full-bleed) ========== */
+.combina-hero { width: 100%; background: var(--muy-oscuro); }
+.combina-hero-title {
+  text-align: center;
+  padding: 56px 5vw 28px;
+  margin: 0;
+}
+.combina-hero-title .label {
+  color: var(--dorado);
+  font-size: 11px;
+  letter-spacing: 4px;
+}
+.combina-hero-title-text {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: -0.3px;
+}
+.combina-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--muy-oscuro);
+}
+.combina-hero-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 11;
+  min-height: 360px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  background: #111;
+}
+.combina-hero-card-bg {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s ease;
+  z-index: 1;
+}
+.combina-hero-card:hover .combina-hero-card-bg { transform: scale(1.06); }
+.combina-hero-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+.combina-hero-card-body {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 28px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+  transition: transform 0.35s ease;
+}
+.combina-hero-card:hover .combina-hero-card-body { transform: translateY(-6px); }
+.combina-hero-card-name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #fff;
+}
+.combina-hero-card-arrow {
+  font-size: 22px;
+  color: var(--dorado);
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+.combina-hero-card:hover .combina-hero-card-arrow { transform: translateX(8px); }
+
+/* Yellow empty variant */
+.combina-hero-card-empty .combina-hero-card-bg {
+  background: linear-gradient(135deg, #F4D03F 0%, #E8C035 100%);
+}
+.combina-hero-card-empty .combina-hero-card-overlay { display: none; }
+.combina-hero-card-empty:hover .combina-hero-card-bg { transform: none; }
+.combina-hero-card-empty-stack {
+  position: absolute;
+  inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
+  z-index: 3;
+  padding-bottom: 80px;
+}
+.combina-hero-card-empty-stack .mark {
+  font-family: var(--font-display);
+  font-size: 36px;
+  letter-spacing: 8px;
+  color: rgba(0,0,0,0.78);
+  font-weight: 300;
+}
+.combina-hero-card-empty-stack .small {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+}
+.combina-hero-card-empty .combina-hero-card-body {
+  background: rgba(0,0,0,0.06);
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+.combina-hero-card-empty .combina-hero-card-name { color: rgba(0,0,0,0.85); }
+.combina-hero-card-empty .combina-hero-card-arrow { color: rgba(0,0,0,0.72); }
+
+@media (max-width: 900px) {
+  .combina-hero-grid { grid-template-columns: 1fr; gap: 2px; }
+  .combina-hero-card { aspect-ratio: 16 / 9; min-height: 260px; }
+  .combina-hero-title { padding: 40px 5vw 20px; }
+  .combina-hero-card-body { padding: 22px 24px; }
+}
