@@ -508,7 +508,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cat-card-arrow { font-family: var(--font-display); font-size: 26px; color: var(--blanco); }
 
 /* ============================================================ INTRO COPY (subpaginas) */
-.intro { background: var(--blanco); padding: 60px 5vw; }
+.intro { background: var(--blanco); padding: 48px 5vw 24px; }
 .intro-inner { max-width: 980px; margin: 0 auto; }
 .intro p { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.65; color: var(--oscuro); margin-bottom: 14px; }
 .intro p strong { font-weight: 500; color: var(--profundo); }
@@ -1099,7 +1099,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ============================================================ PRODUCTOS RICH (subpaginas) */
-.productos-section { background: var(--blanco); padding: 48px 5vw; }
+.productos-section { background: var(--blanco); padding: 28px 5vw 56px; }
 .productos-inner { max-width: 1080px; margin: 0 auto; }
 .productos-inner .label { display: block; margin-bottom: 16px; text-align: center; }
 .productos-grid {
