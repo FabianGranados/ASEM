@@ -440,7 +440,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .stat-label { font-family: var(--font-display); font-weight: 400; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
 /* ============================================================ CATALOGO (home) */
-.catalogo { background: var(--neutro); padding: 96px 5vw; }
+.catalogo { background: var(--neutro); padding: 72px 5vw; }
 .catalogo-accesorios { background: var(--blanco); }
 .catalogo-accesorios + section { border-top: 1px solid rgba(0,0,0,0.04); }
 .catalogo-accesorios .catalogo-banner {
@@ -508,14 +508,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cat-card-arrow { font-family: var(--font-display); font-size: 26px; color: var(--blanco); }
 
 /* ============================================================ INTRO COPY (subpaginas) */
-.intro { background: var(--blanco); padding: 80px 5vw; }
+.intro { background: var(--blanco); padding: 60px 5vw; }
 .intro-inner { max-width: 980px; margin: 0 auto; }
-.intro p { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.8; color: var(--oscuro); margin-bottom: 18px; }
+.intro p { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.65; color: var(--oscuro); margin-bottom: 14px; }
 .intro p strong { font-weight: 500; color: var(--profundo); }
-.intro .lead { font-size: 19px; color: var(--gris); margin-bottom: 28px; }
+.intro .lead { font-size: 19px; color: var(--gris); margin-bottom: 20px; }
 
 /* Bloque "Ventajas" / lista de checks */
-.ventajas { background: var(--neutro); padding: 80px 5vw; }
+.ventajas { background: var(--neutro); padding: 60px 5vw; }
 .ventajas-inner { max-width: 1080px; margin: 0 auto; }
 .ventajas h2 { font-family: var(--font-display); font-weight: 300; font-size: clamp(28px, 4vw, 40px); letter-spacing: 2px; color: var(--oscuro); margin-bottom: 36px; line-height: 1.2; }
 .ventajas ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 36px; }
@@ -548,7 +548,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .showcase-section {
   position: relative;
   background: var(--muy-oscuro);
-  padding: 96px 5vw 80px;
+  padding: 64px 5vw 48px;
   overflow: hidden;
   color: var(--blanco);
   isolation: isolate;
@@ -849,7 +849,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero-rating .dot { color: rgba(255,255,255,0.35); margin: 0 4px; }
 
 /* ============================================================ TESTIMONIOS */
-.testimonios-section { background: var(--neutro); padding: 96px 5vw; }
+.testimonios-section { background: var(--neutro); padding: 64px 5vw; }
 .testimonios-inner { max-width: 1280px; margin: 0 auto; }
 .testimonios-head { text-align: center; margin-bottom: 56px; }
 .testimonios-head h2 {
@@ -937,7 +937,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ============================================================ FAQ */
-.faq-section { background: var(--blanco); padding: 96px 5vw; }
+.faq-section { background: var(--blanco); padding: 72px 5vw; }
 .faq-inner { max-width: 880px; margin: 0 auto; }
 .faq-head { text-align: center; margin-bottom: 48px; }
 .faq-head h2 {
@@ -1099,9 +1099,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ============================================================ PRODUCTOS RICH (subpaginas) */
-.productos-section { background: var(--blanco); padding: 64px 5vw; }
+.productos-section { background: var(--blanco); padding: 48px 5vw; }
 .productos-inner { max-width: 1080px; margin: 0 auto; }
-.productos-inner .label { display: block; margin-bottom: 24px; text-align: center; }
+.productos-inner .label { display: block; margin-bottom: 16px; text-align: center; }
 .productos-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1192,7 +1192,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ============================================================ CTA FINAL */
-.cta-final { background: var(--oscuro); padding: 110px 5vw; text-align: center; }
+.cta-final { background: var(--oscuro); padding: 88px 5vw; text-align: center; }
 .cta-final h2 { font-family: var(--font-display); font-weight: 200; font-size: clamp(36px, 5.6vw, 60px); letter-spacing: 3px; line-height: 1.1; color: var(--blanco); margin-bottom: 24px; }
 .cta-final-sub { font-family: var(--font-body); font-weight: 300; font-size: 18px; color: rgba(255,255,255,0.65); margin-bottom: 40px; }
 .btn-large { background: var(--dorado); color: var(--oscuro); font-family: var(--font-display); font-weight: 500; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; padding: 18px 44px; border-radius: 3px; display: inline-flex; align-items: center; gap: 12px; transition: background 0.25s, transform 0.25s; }
@@ -1628,7 +1628,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .combina-hero { width: 100%; max-width: 100vw; overflow: hidden; background: var(--muy-oscuro); }
 .combina-hero-title {
   text-align: center;
-  padding: 56px 5vw 28px;
+  padding: 48px 5vw 22px;
   margin: 0;
 }
 .combina-hero-title .label {
