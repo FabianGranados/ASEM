@@ -22,7 +22,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -31,6 +31,8 @@ body {
   line-height: 1.8;
   color: var(--oscuro);
   background: var(--blanco);
+  overflow-x: hidden;
+  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -1623,7 +1625,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ========== Combina hero (post-galeria, full-bleed) ========== */
-.combina-hero { width: 100%; background: var(--muy-oscuro); }
+.combina-hero { width: 100%; max-width: 100vw; overflow: hidden; background: var(--muy-oscuro); }
 .combina-hero-title {
   text-align: center;
   padding: 56px 5vw 28px;
