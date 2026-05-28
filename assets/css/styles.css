@@ -140,7 +140,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .nav-dropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 0;
   min-width: 280px;
   background: var(--muy-oscuro);
@@ -149,8 +149,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 12px 0;
   display: none;
   flex-direction: column;
-  margin-top: 8px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 10px;
 }
 .nav-item:hover .nav-dropdown,
 .nav-item:focus-within .nav-dropdown { display: flex; }
