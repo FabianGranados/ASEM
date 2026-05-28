@@ -1702,41 +1702,54 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .combina-hero-card:hover .combina-hero-card-arrow { transform: translateX(8px); }
 
-/* Yellow empty variant */
+/* Yellow empty variant: categoria existente, foto pendiente */
 .combina-hero-card-empty .combina-hero-card-bg {
   background: linear-gradient(135deg, #F4D03F 0%, #E8C035 100%);
 }
 .combina-hero-card-empty .combina-hero-card-overlay { display: none; }
 .combina-hero-card-empty:hover .combina-hero-card-bg { transform: none; }
-.combina-hero-card-empty-stack {
+.combina-hero-card-empty .combina-hero-card-body { display: none; }
+.combina-hero-card-empty-content {
   position: absolute;
   inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 14px;
+  text-align: center;
+  padding: 40px 28px;
+  gap: 16px;
   z-index: 3;
-  padding-bottom: 80px;
 }
-.combina-hero-card-empty-stack .mark {
+.combina-hero-card-empty-eyebrow {
   font-family: var(--font-display);
-  font-size: 36px;
-  letter-spacing: 8px;
-  color: rgba(0,0,0,0.78);
-  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+  font-weight: 500;
 }
-.combina-hero-card-empty-stack .small {
+.combina-hero-card-empty-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  color: rgba(0,0,0,0.88);
+  margin: 0;
+  max-width: 90%;
+}
+.combina-hero-card-empty-cta {
   font-family: var(--font-display);
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.55);
+  color: rgba(0,0,0,0.7);
+  margin-top: 10px;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
-.combina-hero-card-empty .combina-hero-card-body {
-  background: rgba(0,0,0,0.06);
-  border-top: 1px solid rgba(0,0,0,0.1);
+.combina-hero-card-empty:hover .combina-hero-card-empty-cta {
+  color: rgba(0,0,0,0.95);
+  transform: translateX(4px);
 }
-.combina-hero-card-empty .combina-hero-card-name { color: rgba(0,0,0,0.85); }
-.combina-hero-card-empty .combina-hero-card-arrow { color: rgba(0,0,0,0.72); }
 
 @media (max-width: 900px) {
   .combina-hero-grid { grid-template-columns: 1fr; gap: 2px; }
