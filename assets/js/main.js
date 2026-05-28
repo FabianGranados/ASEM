@@ -235,3 +235,44 @@ document.documentElement.classList.add('js');
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   els.forEach(function (el) { io.observe(el); });
 })();
+
+/* WhatsApp lead split: 65% Laura / 35% Paola, sticky por visitante via localStorage.
+   Reemplaza el href de todos los botones .btn-wa, .wa-float, .wa-sticky-mobile
+   con el numero asignado. Si window.gtag existe, dispara evento al click para
+   trackear distribucion en Google Analytics. */
+(function () {
+  var STORAGE_KEY = 'asem_wa_assigned';
+  var LAURA = '573013228490';
+  var PAOLA = '573016003031';
+
+  function getAssignment() {
+    var saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    if (saved === 'L' || saved === 'P') return saved;
+    var assigned = Math.random() < 0.65 ? 'L' : 'P';
+    try { localStorage.setItem(STORAGE_KEY, assigned); } catch (e) {}
+    return assigned;
+  }
+
+  var assigned = getAssignment();
+  var phone = assigned === 'L' ? LAURA : PAOLA;
+  var comercial = assigned === 'L' ? 'laura' : 'paola';
+
+  // Reemplaza todos los wa.me/<LAURA> con el asignado, solo en botones accionables
+  var selectors = ['a.btn-wa', 'a.wa-float', 'a.wa-sticky-mobile'];
+  document.querySelectorAll(selectors.join(',')).forEach(function (el) {
+    var href = el.getAttribute('href') || '';
+    // Solo reemplaza si tiene el numero por default (Laura). Footer info links no usan estas clases.
+    href = href.replace(/wa\.me\/57\d{10}/, 'wa.me/' + phone);
+    el.setAttribute('href', href);
+    el.addEventListener('click', function () {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'whatsapp_click', {
+          event_category: 'lead',
+          event_label: comercial,
+          value: 1
+        });
+      }
+    });
+  });
+})();
