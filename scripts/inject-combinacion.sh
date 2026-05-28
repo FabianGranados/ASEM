@@ -18,7 +18,7 @@ get_meta() {
     sillas-para-eventos-bogota)                echo "Sillas Lounge|sillas-para-fiestas-en-bogota.webp|real" ;;
     sillas-para-juntas-bogota)                 echo "Sillas Interlocutoras|hero-sillas-interlocutoras-banner.webp|real" ;;
     sillas-acapulco-para-eventos-bogota)       echo "Sillas Acapulco|hero-acapulco-banner.webp|real" ;;
-    poltronas-para-eventos-en-bogota)          echo "Poltronas Lounge||empty" ;;
+    poltronas-para-eventos-en-bogota)          echo "Poltronas Lounge|poltronas-para-eventos-empresariales.webp|real" ;;
     bombillos-vintage-para-eventos)            echo "Bombillos Vintage|hero-bombillos-banner.webp|real" ;;
     pista-de-baile-para-eventos)               echo "Pista de Baile LED|hero-pista-baile-banner.webp|real" ;;
     mobiliario-led-eventos-bogota)             echo "Mobiliario LED|hero-led-banner.webp|real" ;;
