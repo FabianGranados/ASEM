@@ -1393,6 +1393,7 @@ SUBPAGE_CUSTOM = {
     },
     '16_PISTA_BAILE': {
         'hero_subtitle': 'Pista de baile LED Infinity 3D con efecto t&uacute;nel infinito multicolor. La estrella visual de cualquier fiesta nocturna, boda con baile o evento corporativo en Bogot&aacute;.',
+        'hero_banner': 'hero-pista-baile-banner.webp',
         'hero_specs': [
             ('M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9-9-4-9-9z M12 3v9l6 3', 'Efecto t&uacute;nel 3D infinito'),
             ('M12 2v4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M2 12h4 M18 12h4', '16 colores RGB'),
@@ -2314,6 +2315,7 @@ def write_image_sitemap():
         ('hero-calefactores-banner.webp', 'Calefactores piramide para eventos al aire libre en Bogota - ASEM'),
         ('hero-salas-lounge-banner.webp', 'Salon de eventos con multiples salas lounge blancas y cojines negros - ASEM'),
         ('hero-separadores-fila-banner.webp', 'Pasillo con alfombra roja y separadores de fila plateados para evento - ASEM'),
+        ('hero-pista-baile-banner.webp', 'Pista de baile LED multicolor infinity con personas bailando en concierto en Bogota - ASEM'),
     ]
     for key, p in DATA.items():
         if key.startswith('00_'):
