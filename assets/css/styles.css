@@ -1521,3 +1521,103 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
   .section-head { flex-direction: column; align-items: flex-start; }
 }
+
+/* ========== Combina con / Lo mas alquilado ========== */
+.combinacion { padding: 100px 5vw 80px; background: #FAFAF7; }
+.combinacion-inner { max-width: 1280px; margin: 0 auto; }
+.combinacion-head { margin-bottom: 56px; max-width: 720px; }
+.combinacion-head .label { color: var(--dorado); }
+.combinacion-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--oscuro);
+  margin: 14px 0 0;
+  letter-spacing: -0.5px;
+}
+.combinacion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.combinacion-grid.is-six { grid-template-columns: repeat(3, 1fr); }
+
+.combinacion-card {
+  background: var(--blanco);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.combinacion-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+}
+.combinacion-card-photo {
+  aspect-ratio: 4 / 5;
+  background: #EFEFEA;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.combinacion-card-photo img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  transition: transform 0.45s ease;
+}
+.combinacion-card:hover .combinacion-card-photo img { transform: scale(1.04); }
+
+.combinacion-card-body {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 26px;
+  background: var(--blanco);
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+.combinacion-card-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--oscuro);
+  font-weight: 500;
+}
+.combinacion-card-arrow {
+  font-size: 20px;
+  color: var(--dorado);
+  transition: transform 0.28s ease;
+  line-height: 1;
+}
+.combinacion-card:hover .combinacion-card-arrow { transform: translateX(6px); }
+
+/* Yellow placeholder variant */
+.combinacion-card-empty .combinacion-card-photo {
+  background: linear-gradient(135deg, #F4D03F 0%, #E8C035 100%);
+  flex-direction: column;
+  gap: 14px;
+}
+.combinacion-card-empty .combinacion-card-photo-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+  text-align: center;
+  padding: 0 20px;
+}
+.combinacion-card-empty .combinacion-card-photo-mark {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(0,0,0,0.7);
+  letter-spacing: 6px;
+}
+
+@media (max-width: 900px) {
+  .combinacion-grid, .combinacion-grid.is-six { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .combinacion { padding: 72px 5vw 60px; }
+}
+@media (max-width: 560px) {
+  .combinacion-grid, .combinacion-grid.is-six { grid-template-columns: 1fr; gap: 24px; }
+  .combinacion-card-photo { aspect-ratio: 4 / 3; }
+}
