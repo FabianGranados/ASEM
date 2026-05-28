@@ -441,6 +441,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .catalogo { background: var(--neutro); padding: 96px 5vw; }
 .catalogo-accesorios { background: var(--blanco); }
 .catalogo-accesorios + section { border-top: 1px solid rgba(0,0,0,0.04); }
+.catalogo-accesorios .catalogo-banner {
+  width: 100%;
+  height: 320px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  margin: 0 auto 56px;
+  max-width: 1280px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+@media (max-width: 768px) {
+  .catalogo-accesorios .catalogo-banner { height: 200px; margin-bottom: 36px; border-radius: 4px; }
+}
 .section-head { max-width: 1280px; margin: 0 auto 56px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
 .section-head-text { max-width: 640px; }
 .section-head-aside { font-family: var(--font-body); font-weight: 300; font-size: 15px; color: var(--gris); max-width: 360px; line-height: 1.7; }
