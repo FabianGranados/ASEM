@@ -1,6 +1,6 @@
 LISTADO DE FOTOS PENDIENTES POR SUBIR
 ======================================================================
-TOTAL: 128 fotos pendientes
+TOTAL: 118 fotos pendientes
 
 
 Como subir cada foto:
@@ -49,29 +49,9 @@ Tamano recomendado: 1200x900 px maximo, < 200KB
   [ ] alquiler-de-mobiliario-para-fiestas-en-bogota.webp
         Alt text (concepto de la foto): alquiler de mobiliario para fiestas en bogota
 
---- SALAS-RUSTICAS-PARA-EVENTOS-BOGOTA (11 fotos) ---
-  [ ] alquiler-de-salas-rusticas-bogota.webp
-        Alt text (concepto de la foto): alquiler de salas rusticas bogota
+--- SALAS-RUSTICAS-PARA-EVENTOS-BOGOTA (1 foto) ---
   [ ] calefactores-en-alquiler.webp
         Alt text (concepto de la foto): calefactores en alquiler
-  [ ] salas-en-madera-para-eventos.webp
-        Alt text (concepto de la foto): salas en madera para eventos
-  [ ] alquiler-de-mobiliario-rustico-para-eventos.webp
-        Alt text (concepto de la foto): alquiler de mobiliario rustico para eventos
-  [ ] sala-rustica-en-bogota.webp
-        Alt text (concepto de la foto): sala rustica en bogota
-  [ ] tu-sala-para-eventos.webp
-        Alt text (concepto de la foto): tu sala para eventos
-  [ ] alquiler-de-salas-para-eventos.webp
-        Alt text (concepto de la foto): alquiler de salas para eventos
-  [ ] salas-en-madera-en-alquiler-bogota.webp
-        Alt text (concepto de la foto): salas en madera en alquiler bogota
-  [ ] salas-rusticas-para-eventos-bogota-en-alquiler.webp
-        Alt text (concepto de la foto): salas rusticas para eventos bogota en alquiler
-  [ ] salas-para-eventos-sociales.webp
-        Alt text (concepto de la foto): salas para eventos sociales
-  [ ] alquiler-de-salas-para-eventos-rusticos.webp
-        Alt text (concepto de la foto): alquiler de salas para eventos rusticos
 
 --- MESAS-PARA-EVENTOS-BOGOTA (11 fotos) ---
   [ ] alquiler-de-mesas-de-coctel-para-eventos-1.webp
